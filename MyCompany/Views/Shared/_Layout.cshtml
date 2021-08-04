@@ -10,10 +10,10 @@
         <div id="main">
             <div class="container">
                 <div class="row main-row">
-                    <div class="col-4 col-12-medium">
+                    <div class="col-8 col-12-medium">
                         @RenderBody()
                     </div>
-                    @{ await Html.RenderPartialAsync("FooterPartial");}
+                    @{ await Html.RenderPartialAsync("SidebarPartial");}
                 </div>
             </div>
         </div>
