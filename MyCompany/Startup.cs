@@ -60,8 +60,20 @@ namespace MyCompany
 				options.SlidingExpiration = true;
 			});
 
+			// Set up authorization policy for Admin area
+			services.AddAuthorization(x =>
+			{
+				x.AddPolicy("AdminArea", policy =>
+				{
+					policy.RequireRole("admin");
+				});
+			});
+
 			// Add services for controllers and views(MVC)
-			services.AddControllersWithViews()
+			services.AddControllersWithViews(x =>
+				{
+					x.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
+				})
 				.SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
 				.AddSessionStateTempDataProvider();
 		}
@@ -81,6 +93,10 @@ namespace MyCompany
 
 			app.UseEndpoints(endpoints =>
 			{
+				endpoints.MapControllerRoute(
+					name: "admin",
+					pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
 				endpoints.MapControllerRoute(
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id?}");
