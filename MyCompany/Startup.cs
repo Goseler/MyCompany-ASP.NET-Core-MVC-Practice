@@ -56,7 +56,7 @@ namespace MyCompany
 				options.Cookie.Name = "myCompanyAuth";
 				options.Cookie.HttpOnly = true;
 				options.LoginPath = "/account/login";
-				options.AccessDeniedPath = "account/accessdenied";
+				options.AccessDeniedPath = "/account/accesdenied";
 				options.SlidingExpiration = true;
 			});
 
