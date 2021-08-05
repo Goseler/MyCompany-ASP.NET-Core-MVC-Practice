@@ -1,4 +1,4 @@
-﻿using MyCompany.Domain.Enities;
+﻿using MyCompany.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace MyCompany.Domain.Repositories.Abstract
     public interface IServiceItemsRepository
     {
         IQueryable<ServiceItem> GetServiceItems();
-        ServiceItem GetTServiceItemById(Guid id);
+        ServiceItem GetServiceItemById(Guid id);
         void SaveServiceItem(ServiceItem entity);
         void DeleteServiceItem(Guid id);
     }

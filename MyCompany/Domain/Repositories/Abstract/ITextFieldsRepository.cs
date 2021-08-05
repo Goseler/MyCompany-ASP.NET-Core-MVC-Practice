@@ -1,4 +1,4 @@
-﻿using MyCompany.Domain.Enities;
+﻿using MyCompany.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ namespace MyCompany.Domain.Repositories.Abstract
 {
     public interface ITextFieldsRepository
     {
-        IQueryable<ServiceItems> GetTextFields();
-        ServiceItems GetTextFieldById(Guid id);
-        ServiceItems GetTextFieldByCodeWord(string codeword);
-        void SaveTextField(ServiceItems entity);
+        IQueryable<TextField> GetTextFields();
+        TextField GetTextFieldById(Guid id);
+        TextField GetTextFieldByCodeWord(string codeword);
+        void SaveTextField(TextField entity);
         void DeleteTextField(Guid id);
     }
 }

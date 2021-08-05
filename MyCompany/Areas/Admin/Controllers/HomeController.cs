@@ -13,13 +13,13 @@ namespace MyCompany.Areas.Admin.Controllers
     {
         private readonly DataManager dataManager;
 
-		public HomeController(DataManager manager)
+		public HomeController(DataManager dataManager)
 		{
-            this.dataManager = manager;
+            this.dataManager = dataManager;
 		}
         public IActionResult Index()
 		{
-            return View();
+            return View(dataManager.ServiceItems.GetServiceItems());
 		}
     }
 }

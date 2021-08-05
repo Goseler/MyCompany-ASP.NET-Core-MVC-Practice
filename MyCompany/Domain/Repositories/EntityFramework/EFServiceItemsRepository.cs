@@ -1,4 +1,4 @@
-﻿using MyCompany.Domain.Enities;
+﻿using MyCompany.Domain.Entities;
 using MyCompany.Domain.Repositories.Abstract;
 using System;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 			return context.ServiceItems;
 		}
 
-		public ServiceItem GetTServiceItemById(Guid id)
+		public ServiceItem GetServiceItemById(Guid id)
 		{
 			return context.ServiceItems.FirstOrDefault(x => x.Id == id);
 		}

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MyCompany.Domain.Enities;
+using MyCompany.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace MyCompany.Domain
     {
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 		
-        public DbSet<ServiceItems> TextFields { get; set; }
+        public DbSet<TextField> TextFields { get; set; }
         public DbSet<ServiceItem> ServiceItems { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
@@ -46,19 +46,19 @@ namespace MyCompany.Domain
 				UserId = "404E976E-F70E-43B6-BE11-8EA8BAF188B3"
 			});
 
-			builder.Entity<ServiceItems>().HasData(new ServiceItems
+			builder.Entity<TextField>().HasData(new TextField
 			{
 				Id = new Guid("215A0BCC-A960-4135-9147-CBC78A84DFA1"),
 				CodeWord = "PageIndex",
 				Title = "Главная"
 			});
-			builder.Entity<ServiceItems>().HasData(new ServiceItems
+			builder.Entity<TextField>().HasData(new TextField
 			{
 				Id = new Guid("67C3D69D-E26E-42BF-98F1-7DE7382E3F02"),
 				CodeWord = "PageServices",
 				Title = "Наши услуги"
 			});
-			builder.Entity<ServiceItems>().HasData(new ServiceItems
+			builder.Entity<TextField>().HasData(new TextField
 			{
 				Id = new Guid("4269A391-B514-44AB-A7CC-DF2C68F5BDB1"),
 				CodeWord = "PageContacts",

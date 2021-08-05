@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCompany.Domain.Enities
+namespace MyCompany.Domain.Entities
 {
     public class ServiceItem : EntityBase
     {

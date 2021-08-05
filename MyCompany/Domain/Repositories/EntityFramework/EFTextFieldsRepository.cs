@@ -1,4 +1,4 @@
-﻿using MyCompany.Domain.Enities;
+﻿using MyCompany.Domain.Entities;
 using MyCompany.Domain.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
@@ -16,22 +16,22 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 			this.context = context;
 		}
 
-		public IQueryable<ServiceItems> GetTextFields()
+		public IQueryable<TextField> GetTextFields()
 		{
 			return context.TextFields;
 		}
 
-		public ServiceItems GetTextFieldById(Guid id)
+		public TextField GetTextFieldById(Guid id)
 		{
 			return context.TextFields.FirstOrDefault(x => x.Id == id);
 		}
 
-		public ServiceItems GetTextFieldByCodeWord(string codeword)
+		public TextField GetTextFieldByCodeWord(string codeword)
 		{
 			return context.TextFields.FirstOrDefault(x => x.CodeWord == codeword);
 		}
 
-		public void SaveTextField(ServiceItems entity)
+		public void SaveTextField(TextField entity)
 		{
 			if (entity.Id == default)
 			{
@@ -46,7 +46,7 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 
 		public void DeleteTextField(Guid id)
 		{
-			context.TextFields.Remove(new ServiceItems() { Id = id });
+			context.TextFields.Remove(new TextField() { Id = id });
 			context.SaveChanges();
 		}
 	}
