@@ -1201,3 +1201,6 @@ ul.link-list li {
   display: block;
   max-width: 100%;
   margin: 0 auto; }
+
+#nav a {
+  text-transform: capitalize; }
