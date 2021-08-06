@@ -21,5 +21,12 @@ namespace MyCompany.Areas.Admin.Controllers
 		{
             return View(dataManager.ServiceItems.GetServiceItems());
 		}
+
+        [HttpPost]
+        public IActionResult Index(string choise)
+		{
+
+            return PartialView("Services");
+		}
     }
 }

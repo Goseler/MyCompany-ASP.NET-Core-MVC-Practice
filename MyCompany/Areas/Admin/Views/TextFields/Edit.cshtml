@@ -20,11 +20,14 @@
                 <input asp-for="Title" />
                 <span asp-validation-for="Title"></span>
             </div>
-            <div class="div-box"  id="editor">
-                <label asp-for="Text"></label>
-                <textarea asp-for="Text"></textarea>
-                <span asp-validation-for="Text"></span>
-            </div>
+            @if (ViewBag.IsText == null)
+            {
+                <div class="div-box"  id="editor">
+                    <label asp-for="Text"></label>
+                    <textarea asp-for="Text"></textarea>
+                    <span asp-validation-for="Text"></span>
+                </div>
+            }
             <div class="div-box">
                 <label asp-for="MetaTitle"></label>
                 <input asp-for="MetaTitle" />

@@ -1,5 +1,5 @@
 ﻿@model IQueryable<ServiceItem>
-@{ 
+@{
     string strTitle = "Панель администратора";
     ViewBag.Titl = strTitle;
 }
@@ -7,6 +7,10 @@
 <div>
     <h1>@strTitle</h1>
     <div>
+        <form  asp-area="Admin" asp-controller="Home" asp-action="Index" data-ajax="true"  method="post" data-ajax-update="results">
+
+        </form>
+
         <h3>Наши услуги</h3>
         <div class="div-box">
             <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="">Добавить услугу</a>
@@ -16,18 +20,18 @@
             <div>
                 @foreach (ServiceItem entity in Model)
                 {
-                <div>
-                    <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
-                        @($"{entity.Title}")
-                    </a>
+                    <div>
+                        <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
+                            @($"{entity.Title}")
+                        </a>
 
-                    <a class="div-box" asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="@entity.Id">Редактировать</a>
+                        <a class="div-box" asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="@entity.Id">Редактировать</a>
 
-                    <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
-                        <input type="hidden" name="id" value="@entity.Id" />
-                        <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">Удалить</a>
-                    </form>
-                </div>
+                        <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.Id" />
+                            <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">Удалить</a>
+                        </form>
+                    </div>
                 }
             </div>
         }
@@ -35,6 +39,8 @@
     <div class="div-box">
         <h3>Редактировать страницы сайта</h3>
         <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageIndex">Главная</a>
+        <br />
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageNews">Новости</a>
         <br />
         <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageServices">Наши услги</a>
         <br />
@@ -46,3 +52,4 @@
         </form>
     </div>
 </div>
+

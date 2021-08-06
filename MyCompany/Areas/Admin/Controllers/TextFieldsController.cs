@@ -17,6 +17,8 @@ namespace MyCompany.Areas.Admin.Controllers
 		public IActionResult Edit(string codeWord)
 		{
 			var entity = dataManager.TextFields.GetTextFieldByCodeWord(codeWord);
+			if (codeWord == "PageServices" || codeWord == "PageNews")
+				ViewBag.IsText = false;
 			return View(entity);
 		}
 

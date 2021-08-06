@@ -32,6 +32,7 @@ namespace MyCompany
 			// Connect required functionality as services
 			services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
 			services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
+			services.AddTransient<INewsItemsRepository, EFNewsItemsReposiitory>();
 			services.AddTransient<DataManager>();
 
 			// Connect context DB
@@ -70,7 +71,7 @@ namespace MyCompany
 			});
 
 			// Add services for controllers and views(MVC)
-			services.AddControllersWithViews(x =>
+			services.AddMvc(x =>
 				{
 					x.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
 				})

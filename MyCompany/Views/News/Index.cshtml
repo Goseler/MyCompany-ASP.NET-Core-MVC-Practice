@@ -1,0 +1,31 @@
+﻿@model NewsViewModel
+@{ 
+	ViewBag.Title = Model.TextField.MetaTitle;
+	ViewBag.Description = Model.TextField.MetaDescription;
+	ViewBag.KeyWords = Model.TextField.MetaKeywords;
+}
+
+<div>
+	@if (Model.NewsItems.Any())
+	{
+		<ul class="big-image-list">
+			@foreach (NewsItem entity in Model.NewsItems)
+			{
+				<li>
+					<a asp-area="" asp-controller="News" asp-action="Index" asp-route-id="@entity.Id">
+						@if (entity.TitleImagePath != default)
+                        {
+							<img src="~/images/@entity.TitleImagePath" alt="" class="left" />
+                        }
+						<h4>@entity.Title</h4>
+					</a>
+					<p style="text-decoration:underline">@entity.DateAdded.ToString("MMM , dd, yyyy")</p>
+					<p>@entity.Subtitle</p>
+				</li>
+			}
+		</ul>
+	}
+</div>
+
+
+
