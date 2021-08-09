@@ -2,9 +2,5 @@
   {
     "outputFile": "wwwroot/css/main.css",
     "inputFile": "wwwroot/sass/main.scss"
-  },
-  {
-    "outputFile": "wwwroot/js/scripts.es5.js",
-    "inputFile": "wwwroot/js/scripts.js"
   }
 ]

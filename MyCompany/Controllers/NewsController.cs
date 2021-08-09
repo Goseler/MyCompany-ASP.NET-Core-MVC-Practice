@@ -20,15 +20,14 @@ namespace MyCompany.Controllers
 
         public IActionResult Index(Guid id)
 		{
-            TextField textField = dataManager.TextFields.GetTextFieldByCodeWord("PageNews"); ;
-            IQueryable<NewsItem> newsItems = dataManager.NewsItems.GetNewsItems();
-            NewsViewModel newsViewModel = new NewsViewModel() { NewsItems = newsItems, TextField = textField };
-
             if (id != default)
 			{
-                newsViewModel.NewsItems = newsItems.Where(n => n.Id == id);
-                return View("Show", newsViewModel);
+                return View("Show", dataManager.NewsItems.GetNewsItemById(id));
 			}
+
+            IQueryable<NewsItem> newsItems = dataManager.NewsItems.GetNewsItems();
+            TextField textField = dataManager.TextFields.GetTextFieldByCodeWord("PageNews"); ;
+            NewsViewModel newsViewModel = new NewsViewModel() { NewsItems = newsItems, TextField = textField };
 
             return View(newsViewModel);
 		}

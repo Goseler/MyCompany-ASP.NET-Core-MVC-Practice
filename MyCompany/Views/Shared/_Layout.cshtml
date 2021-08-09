@@ -3,6 +3,7 @@
 <head>
     @{ await Html.RenderPartialAsync("MetatagsPartial");}
     @{ await Html.RenderPartialAsync("CssPartial");}
+    @{ await Html.RenderPartialAsync("ScriptsPartial");}
 </head>
 <body>
     <div id="page-wrapper">
@@ -19,6 +20,5 @@
         </div>
         @{ await Html.RenderPartialAsync("FooterPartial");}
     </div>
-    @{ await Html.RenderPartialAsync("ScriptsPartial");}
 </body>
 </html>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyCompany.Domain;
+using MyCompany.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,16 @@ namespace MyCompany.Areas.Admin.Controllers
             return View(dataManager.ServiceItems.GetServiceItems());
 		}
 
-        [HttpPost]
-        public IActionResult Index(string choise)
+		[HttpPost]
+        public PartialViewResult Index(AjaxPage Page)
 		{
-
-            return PartialView("Services");
+			return Page switch
+			{
+				AjaxPage.Services => PartialView("ServicesPartial", dataManager.ServiceItems.GetServiceItems()),
+				AjaxPage.Main => PartialView("MainPagesPartial"),
+				AjaxPage.News => PartialView("NewsPartial", dataManager.NewsItems.GetNewsItems()),
+				_ => PartialView("ServicesPartial", dataManager.ServiceItems.GetServiceItems()),
+			};
 		}
     }
 }

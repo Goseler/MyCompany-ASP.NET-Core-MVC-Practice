@@ -1,0 +1,18 @@
+﻿@model NewsItem
+@{
+    ViewBag.Title = Model.MetaTitle;
+    ViewBag.Description = Model.MetaDescription;
+    ViewBag.KeyWords = Model.MetaKeywords;
+}
+
+<div>
+    <h1>@Model.Title</h1>
+    <h2>@Model.Subtitle</h2>
+    <p style="text-decoration:underline; text-align:right">@Model.DateAdded.ToString("MMM , dd, yyyy")</p>
+    <div>
+        <img src="~/images/@Model.TitleImagePath" class="img-block" />
+    </div>
+</div>
+<div>
+    @Html.Raw(Model.Text)
+</div>

@@ -41,7 +41,7 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 
 		public void DeleteNewsItem(Guid id)
 		{
-			context.ServiceItems.Remove(new ServiceItem() { Id = id });
+			context.NewsItems.Remove(new NewsItem() { Id = id });
 			context.SaveChanges();
 		}
 	}
