@@ -11,7 +11,7 @@ namespace MyCompany.Controllers
     {
         public IActionResult TechSupport()
 		{
-            return View(new TechMessage());
+            return View(/*new TechMessage()*/);
 		}
     }
 }

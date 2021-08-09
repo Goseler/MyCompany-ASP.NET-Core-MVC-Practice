@@ -33,6 +33,7 @@ namespace MyCompany
 			services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
 			services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
 			services.AddTransient<INewsItemsRepository, EFNewsItemsReposiitory>();
+			services.AddTransient<ITechMessagesRepository, EFTechMessagesRepository>();
 			services.AddTransient<DataManager>();
 
 			// Connect context DB
