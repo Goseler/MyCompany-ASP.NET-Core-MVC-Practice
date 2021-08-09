@@ -1,0 +1,42 @@
+﻿@model MailRequest
+@{
+    string strSubject = "Ответить на сообщение";
+    ViewBag.Subject = strSubject;
+}
+
+
+<div>
+    <h2>@strSubject</h2>
+    <div>
+        <form asp-area="Admin" asp-controller="UsersMessages" asp-action="Index" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All"></div>
+            <div class="div-box">
+                <label asp-for="Subject"></label>
+                <input asp-for="Subject" readonly />
+            </div>
+
+            <div class="div-box">
+                <label asp-for="DateSent"></label>
+                <input type="text" asp-for="DateSent" readonly />
+                
+            </div>
+
+            <div class="div-box">
+                <label asp-for="ToEmail"></label>
+                <input asp-for="ToEmail" readonly />
+            </div>
+
+            <div class="div-box">
+                <label asp-for="UserBody"></label>
+                <textarea asp-for="UserBody" readonly></textarea>
+            </div>
+
+            <div class="div-box">
+                <label asp-for="ResponseBody"></label>
+                <textarea asp-for="ResponseBody"></textarea>
+                <span asp-validation-for="ResponseBody"></span>
+            </div>
+            <input type="submit" value="Отправить" />
+        </form>
+    </div>
+</div>

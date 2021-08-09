@@ -31,6 +31,7 @@ namespace MyCompany.Areas.Admin.Controllers
 				AjaxPage.Services => PartialView("ServicesPartial", dataManager.ServiceItems.GetServiceItems()),
 				AjaxPage.Main => PartialView("MainPagesPartial"),
 				AjaxPage.News => PartialView("NewsPartial", dataManager.NewsItems.GetNewsItems()),
+				AjaxPage.UsersMessages => PartialView("UsersMessagesPartial", dataManager.TechMessages.GetTechMessages()),
 				_ => PartialView("ServicesPartial", dataManager.ServiceItems.GetServiceItems()),
 			};
 		}

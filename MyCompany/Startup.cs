@@ -35,6 +35,10 @@ namespace MyCompany
 			services.AddTransient<INewsItemsRepository, EFNewsItemsReposiitory>();
 			services.AddTransient<ITechMessagesRepository, EFTechMessagesRepository>();
 			services.AddTransient<DataManager>();
+			services.AddTransient<IMailService, Service.MailService>();
+
+			// Connect required settings for SMTP
+			services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
 
 			// Connect context DB
 			string connection = Configuration.GetConnectionString("DefaultConnection");

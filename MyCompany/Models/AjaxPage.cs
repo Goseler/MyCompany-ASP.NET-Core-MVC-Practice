@@ -4,6 +4,7 @@
 	{
 		Services,
 		Main,
-		News
+		News,
+		UsersMessages
 	}
 }
