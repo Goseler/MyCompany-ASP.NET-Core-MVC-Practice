@@ -12,12 +12,14 @@ namespace MyCompany.Domain
         public ITextFieldsRepository TextFields { get; set; }
         public IServiceItemsRepository ServiceItems { get; set; }
         public INewsItemsRepository NewsItems { get; set; }
+        public ITechMessagesRepository TechMessages { get; set; }
 
-		public DataManager(ITextFieldsRepository textFieldsRepository, IServiceItemsRepository serviceItemsRepository, INewsItemsRepository newsItemsRepository)
+		public DataManager(ITextFieldsRepository textFieldsRepository, IServiceItemsRepository serviceItemsRepository, INewsItemsRepository newsItemsRepository, ITechMessagesRepository techMessagesRepository)
 		{
             TextFields = textFieldsRepository;
             ServiceItems = serviceItemsRepository;
             NewsItems = newsItemsRepository;
+            TechMessages = techMessagesRepository;
 		}
     }
 }
