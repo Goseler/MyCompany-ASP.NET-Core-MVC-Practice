@@ -23,6 +23,11 @@ namespace MyCompany.Domain.Entities
 		[Display(Name = "Текст сообщения")]
 		public virtual string Text { get; set; }
 
+		[Required(ErrorMessage = "Email не указан")]
+		[EmailAddress(ErrorMessage = "Неверный Email")]
+		[Display(Name = "Email")]
+		public virtual string Email { get; set; }
+
 		[DataType(DataType.Time)]
 		public DateTime DateSent { get; set; }
 	}
