@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using MyCompany.Domain.Entities;
 using MyCompany.Domain.Repositories.Abstract;
 
@@ -10,39 +12,50 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 {
 	public class EFNewsItemsReposiitory : INewsItemsRepository
 	{
-		private readonly AppDbContext context;
+		private readonly AppDbContext _context;
 		public EFNewsItemsReposiitory(AppDbContext context)
 		{
-			this.context = context;
+			_context = context;
 		}
 
 		public IQueryable<NewsItem> GetNewsItems()
 		{
-			return context.NewsItems;
+			return _context.NewsItems;
 		}
 
 		public NewsItem GetNewsItemById(Guid id)
 		{
-			return context.NewsItems.FirstOrDefault(x => x.Id == id);
+			return _context.NewsItems.FirstOrDefault(x => x.Id == id);
 		}
 
 		public void SaveNewsItem(NewsItem entity)
 		{
 			if (entity.Id == default || GetNewsItemById(entity.Id) == null)
-			{
-				context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Added;
-			}
+				_context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Added;
 			else
-			{
-				context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-			}
-			context.SaveChanges();
+				_context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+			_context.SaveChanges();
 		}
 
 		public void DeleteNewsItem(Guid id)
 		{
-			context.NewsItems.Remove(new NewsItem() { Id = id });
-			context.SaveChanges();
+			NewsItem newsItem = GetNewsItemById(id);
+
+			if (newsItem != null)
+			{
+				if (newsItem.TitleImagePath != null)
+				{
+					FileInfo file = new FileInfo(newsItem.TitleImagePath);
+					if (file.Exists)
+						file.Delete();
+				}
+				_context.Remove(newsItem);
+			}
+			else
+				throw new ArgumentException("Ошибка удаления. Новость не существует");
+
+			_context.SaveChanges();
 		}
 	}
 }
