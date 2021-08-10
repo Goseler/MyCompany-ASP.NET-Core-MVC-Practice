@@ -11,13 +11,12 @@
 
     <div>
         <label>Выберите страницу для редактирования: </label>
-        <select id="pageName">
+        <select class="changeStatus" name="changeStatus">
             <option value="Services">Наши услуги</option>
             <option value="Main">Страницы сайта</option>
             <option value="News">Новости</option>
             <option value="UsersMessages">Сообщения от пользователей</option>
         </select>
-        <input type="button" id="btnSearch" value="Выбрать" />
 
         <div id="results">@{await Html.RenderPartialAsync("ServicesPartial");}</div>
 
@@ -30,10 +29,10 @@
     </div>
 
 <script>
-    $('#btnSearch').click(function () {
+    $('select.changeStatus').change(function () {
         $.ajax({
             url: '@Url.Action("Index", "Home")',
-            data: { Page: $("#pageName").val() },
+            data: { Page: $('select.changeStatus').val() },
             type: 'POST',
             success: function (data) {
                 $("#results").html(data);
