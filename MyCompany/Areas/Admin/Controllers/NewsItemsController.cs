@@ -17,11 +17,11 @@ namespace MyCompany.Areas.Admin.Controllers
     public class NewsItemsController : Controller
     {
         private readonly DataManager dataManager;
-        private readonly IWebHostEnvironment hostingEnvironment;
-        public NewsItemsController(DataManager dataManager, IWebHostEnvironment hostingEnvironment)
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public NewsItemsController(DataManager dataManager, IWebHostEnvironment webHostEnvironment)
         {
             this.dataManager = dataManager;
-            this.hostingEnvironment = hostingEnvironment;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Edit(Guid id)
@@ -36,8 +36,15 @@ namespace MyCompany.Areas.Admin.Controllers
             {
                 if (titleImageFile != null)
                 {
-                    model.TitleImagePath = titleImageFile.FileName;
-                    using (var stream = new FileStream(Path.Combine(hostingEnvironment.WebRootPath, "images/", titleImageFile.FileName), FileMode.Create))
+                    if (model.TitleImagePath != null)
+                    {
+                        FileInfo file = new FileInfo(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", model.TitleImagePath));
+                        if (file.Exists)
+                            file.Delete();
+                    }
+
+                    model.TitleImagePath = Guid.NewGuid().ToString("N") + titleImageFile.FileName;
+                    using (var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", model.TitleImagePath), FileMode.Create))
                     {
                         titleImageFile.CopyTo(stream);
                     }
