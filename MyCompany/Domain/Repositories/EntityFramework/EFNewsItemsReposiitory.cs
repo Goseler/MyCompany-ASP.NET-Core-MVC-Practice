@@ -28,7 +28,7 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 
 		public void SaveNewsItem(NewsItem entity)
 		{
-			if (entity.Id == default)
+			if (entity.Id == default || GetNewsItemById(entity.Id) == null)
 			{
 				context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Added;
 			}

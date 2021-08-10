@@ -17,6 +17,8 @@ namespace MyCompany.Models
         [Display(Name = "Текст пользователя")]
         [DataType(DataType.MultilineText)]
         public string UserBody { get; set; }
+        [Display(Name = "Титульная картинка")]
+        public string TitleImagePath { get; set; }
         [Display(Name = "Текст сообщения")]
         public string ResponseBody { get; set; }
         [Display(Name = "Дата отправки")]

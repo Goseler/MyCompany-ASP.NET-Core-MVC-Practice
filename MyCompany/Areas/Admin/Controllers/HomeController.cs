@@ -20,7 +20,7 @@ namespace MyCompany.Areas.Admin.Controllers
 		}
         public IActionResult Index()
 		{
-            return View(dataManager.ServiceItems.GetServiceItems());
+            return View(/*dataManager.ServiceItems.GetServiceItems()*/);
 		}
 
 		[HttpPost]
@@ -32,6 +32,7 @@ namespace MyCompany.Areas.Admin.Controllers
 				AjaxPage.Main => PartialView("MainPagesPartial"),
 				AjaxPage.News => PartialView("NewsPartial", dataManager.NewsItems.GetNewsItems()),
 				AjaxPage.UsersMessages => PartialView("UsersMessagesPartial", dataManager.TechMessages.GetTechMessages()),
+				AjaxPage.NewsReviews => PartialView("NewsReviewsPartial", dataManager.NewsMessages.GetNewsMessages()),
 				_ => PartialView("ServicesPartial", dataManager.ServiceItems.GetServiceItems()),
 			};
 		}

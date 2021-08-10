@@ -7,36 +7,25 @@ using System.Threading.Tasks;
 
 namespace MyCompany.Domain.Entities
 {
-    public class NewsMessage : MessageBase
+    public class NewsMessage : EntityBase
     {
-		public NewsMessage()
-		{
-            DateAdded = DateTime.UtcNow;
-		}
-
         [Required(ErrorMessage = "Заполните название новости")]
         [Display(Name = "Название новости")]
         public override string Title { get; set; }
 
         [Display(Name = "Краткое описание новости")]
-        public string Subtitle { get; set; }
+        public override string Subtitle { get; set; }
 
         [Display(Name = "Полное описание новости")]
         public override string Text { get; set; }
 
-        [Display(Name = "Титульная картинка")]
-        public string TitleImagePath { get; set; }
+        [Display(Name = "Текст рецензии")]
+        public string ResponsetText { get; set; } = "Ваша новость была одобрена администрацией компании.";
 
-        [Display(Name = "SEO метатег Title")]
-        public string MetaTitle { get; set; }
-
-        [Display(Name = "SEO метатег Description")]
-        public string MetaDescription { get; set; }
-
-        [Display(Name = "SEO метатег Keywords")]
-        public string MetaKeywords { get; set; }
-
-        [DataType(DataType.Time)]
-        public DateTime DateAdded { get; set; }
+        [Required(ErrorMessage = "Email не указан")]
+        [EmailAddress(ErrorMessage = "Неверный Email")]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
     }
 }

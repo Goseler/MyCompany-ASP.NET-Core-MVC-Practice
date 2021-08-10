@@ -1,9 +1,6 @@
-﻿@model IQueryable<ServiceItem>
-@{
+﻿@{
     string strTitle = "Панель администратора";
     ViewBag.Title = strTitle;
-
-    ViewBag.ModelService = Model;
 }
 
 <div>
@@ -12,13 +9,14 @@
     <div>
         <label>Выберите страницу для редактирования: </label>
         <select class="changeStatus" name="changeStatus">
-            <option value="Services">Наши услуги</option>
             <option value="Main">Страницы сайта</option>
+            <option value="Services">Наши услуги</option>
             <option value="News">Новости</option>
             <option value="UsersMessages">Сообщения от пользователей</option>
+            <option value="NewsReviews">Рецензии новостей</option>
         </select>
 
-        <div id="results">@{await Html.RenderPartialAsync("ServicesPartial");}</div>
+        <div id="results">@{await Html.RenderPartialAsync("MainPagesPartial");}</div>
 
         <div class="div-box">
             <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">

@@ -5,6 +5,7 @@
 		Services,
 		Main,
 		News,
-		UsersMessages
+		UsersMessages,
+		NewsReviews
 	}
 }

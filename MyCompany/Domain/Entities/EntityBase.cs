@@ -31,7 +31,7 @@ namespace MyCompany.Domain.Entities
 		[Display(Name = "SEO метатег Keywords")]
 		public string MetaKeywords { get; set; }
 
-		[DataType(DataType.Time)]
+		[DataType(DataType.DateTime)]
 		public DateTime DateAdded { get; set; }
 	}
 }

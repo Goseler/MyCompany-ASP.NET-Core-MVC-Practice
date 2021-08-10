@@ -35,12 +35,13 @@ namespace MyCompany.Service
             try
             {
                 System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
-                message.IsBodyHtml = false; //тело сообщения в формате HTML
+                message.IsBodyHtml = true; //тело сообщения в формате HTML
                 message.From = new MailAddress(_mailSettings.Mail, _mailSettings.DisplayName); //отправитель сообщения
                 message.To.Add(mailRequest.ToEmail); //адресат сообщения
                 message.Subject = mailRequest.Subject; //тема сообщения
-                message.Body = new string(mailRequest.UserBody + "\n" + mailRequest.DateSent.ToString("MMM , dd, yyyy") +  "\n\n---------------------\n\n" + mailRequest.ResponseBody); //тело сообщения
-                //message.Attachments.Add(new Attachment("... путь к файлу ...")); //добавить вложение к письму при необходимости
+                message.Body = new string("<div>" + mailRequest.ResponseBody + "<br/>" + mailRequest.DateSent.ToString("MMM , dd, yyyy") + "<br/><br/><br/>" + "</div>" + mailRequest.UserBody); //тело сообщения
+                message.Attachments.Add(new Attachment(mailRequest.TitleImagePath)); //добавить вложение к письму при необходимости
+                //var builder = new BodyBuilder();
 
                 using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient(_mailSettings.Host)) //используем сервера Advantiss
                 {

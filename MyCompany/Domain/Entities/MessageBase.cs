@@ -26,6 +26,7 @@ namespace MyCompany.Domain.Entities
 		[Required(ErrorMessage = "Email не указан")]
 		[EmailAddress(ErrorMessage = "Неверный Email")]
 		[Display(Name = "Email")]
+		[DataType(DataType.EmailAddress)]
 		public virtual string Email { get; set; }
 
 		[DataType(DataType.Time)]
