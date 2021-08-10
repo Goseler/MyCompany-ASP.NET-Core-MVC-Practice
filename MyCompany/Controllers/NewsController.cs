@@ -50,13 +50,13 @@ namespace MyCompany.Controllers
                 {
                     if (newsMessage.TitleImagePath != null)
                     {
-                        FileInfo file = new FileInfo(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath));
+                        FileInfo file = new FileInfo(newsMessage.TitleImagePath);
                         if (file.Exists)
                             file.Delete();
                     }
 
-                    newsMessage.TitleImagePath = Guid.NewGuid().ToString("N") + titleImageFile.FileName;
-                    using (var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath), FileMode.Create))
+                    newsMessage.TitleImagePath = Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", Guid.NewGuid().ToString("N") + titleImageFile.FileName);
+                    using (var stream = new FileStream(newsMessage.TitleImagePath, FileMode.Create))
                         titleImageFile.CopyTo(stream);
 
                 }

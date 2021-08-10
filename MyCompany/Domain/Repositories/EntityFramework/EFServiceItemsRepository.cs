@@ -1,45 +1,60 @@
 ﻿using MyCompany.Domain.Entities;
 using MyCompany.Domain.Repositories.Abstract;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace MyCompany.Domain.Repositories.EntityFramework
 {
 	public class EFServiceItemsRepository : IServiceItemsRepository
 	{
-		private readonly AppDbContext context;
+		private readonly AppDbContext _context;
 		public EFServiceItemsRepository(AppDbContext context)
 		{
-			this.context = context;
+			_context = context;
 		}
 
 		public IQueryable<ServiceItem> GetServiceItems()
 		{
-			return context.ServiceItems;
+			return _context.ServiceItems;
 		}
 
 		public ServiceItem GetServiceItemById(Guid id)
 		{
-			return context.ServiceItems.FirstOrDefault(x => x.Id == id);
+			return _context.ServiceItems.FirstOrDefault(x => x.Id == id);
 		}
 
 		public void SaveServiceItem(ServiceItem entity)
 		{
 			if (entity.Id == default)
 			{
-				context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+				_context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Added;
 			}
 			else
 			{
-				context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+				_context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 			}
-			context.SaveChanges();
+			_context.SaveChanges();
 		}
 
 		public void DeleteServiceItem(Guid id)
 		{
-			context.ServiceItems.Remove(new ServiceItem() { Id = id });
-			context.SaveChanges();
+			ServiceItem serviceItem = GetServiceItemById(id);
+
+			if (serviceItem != null)
+			{
+				if (serviceItem.TitleImagePath != null)
+				{
+					FileInfo file = new FileInfo(serviceItem.TitleImagePath);
+					if (file.Exists)
+						file.Delete();
+				}
+				_context.Remove(serviceItem);
+			}
+			else
+				throw new ArgumentException("Ошибка удаления. Новость не существует");
+
+			_context.SaveChanges();
 		}
 
 	}
