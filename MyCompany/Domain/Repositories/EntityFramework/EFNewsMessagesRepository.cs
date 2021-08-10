@@ -2,6 +2,7 @@
 using MyCompany.Domain.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,15 +34,21 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 
 		public void DeleteNewsMessage(Guid id)
 		{
-			NewsMessage entity = _context.NewsMessages.FirstOrDefault(x => x.Id == id);
-			if(entity != null)
+			NewsMessage newsMessage = GetNewsMessageById(id);
+
+			if(newsMessage != null)
 			{
-				_context.Remove(entity);
+				if (newsMessage.TitleImagePath != null)
+				{
+					FileInfo file = new FileInfo(newsMessage.TitleImagePath);
+					if (file.Exists)
+						file.Delete();
+				}
+				_context.Remove(newsMessage);
 			}
 			else
-			{
 				throw new ArgumentException("Ошибка удаления. Новость не существует");
-			}
+
 			_context.SaveChanges();
 		}
 	}
