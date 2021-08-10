@@ -18,6 +18,7 @@ namespace MyCompany.Domain
         public DbSet<ServiceItem> ServiceItems { get; set; }
 		public DbSet<NewsItem> NewsItems { get; set; }
 		public DbSet<TechMessage> TechMessages { get; set; }
+		public DbSet<NewsMessage> NewsMessages { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{

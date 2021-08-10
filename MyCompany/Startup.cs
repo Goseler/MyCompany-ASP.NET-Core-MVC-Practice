@@ -34,6 +34,7 @@ namespace MyCompany
 			services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
 			services.AddTransient<INewsItemsRepository, EFNewsItemsReposiitory>();
 			services.AddTransient<ITechMessagesRepository, EFTechMessagesRepository>();
+			services.AddTransient<INewsMessagesRepository, EFNewsMessagesRepository>();
 			services.AddTransient<DataManager>();
 			services.AddTransient<IMailService, Service.MailService>();
 

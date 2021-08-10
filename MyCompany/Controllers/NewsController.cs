@@ -31,5 +31,17 @@ namespace MyCompany.Controllers
 
             return View(newsViewModel);
 		}
+
+        public IActionResult Add()
+		{
+
+            return View();
+		}
+
+        [HttpPost]
+        public IActionResult Add(NewsMessage entity)
+		{
+            return View();
+		}
     }
 }

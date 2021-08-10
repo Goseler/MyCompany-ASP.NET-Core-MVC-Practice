@@ -5,6 +5,9 @@
 	ViewBag.KeyWords = Model.TextField.MetaKeywords;
 }
 
+<div style="margin-bottom:50px;">
+    <input type="button" value="Добавить новость" asp-area="" asp-controller="News" asp-action="Add"/>
+</div>
 <div>
 	@if (Model.NewsItems.Any())
 	{
@@ -25,9 +28,6 @@
 			}
 		</ul>
 	}
-</div>
-<div>
-    <input type="button" value="Добавить новость" asp-controller=""/>
 </div>
 
 
