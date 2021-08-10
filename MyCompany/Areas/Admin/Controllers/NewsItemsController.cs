@@ -38,13 +38,13 @@ namespace MyCompany.Areas.Admin.Controllers
                 {
                     if (model.TitleImagePath != null)
                     {
-                        FileInfo file = new FileInfo(model.TitleImagePath);
+                        FileInfo file = new FileInfo(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", model.TitleImagePath));
                         if (file.Exists)
                             file.Delete();
                     }
 
-                    model.TitleImagePath = Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", Guid.NewGuid().ToString("N") + titleImageFile.FileName);
-                    using (var stream = new FileStream(model.TitleImagePath, FileMode.Create))
+                    model.TitleImagePath = Guid.NewGuid().ToString("N") + titleImageFile.FileName;
+                    using (var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", model.TitleImagePath), FileMode.Create))
                     {
                         titleImageFile.CopyTo(stream);
                     }

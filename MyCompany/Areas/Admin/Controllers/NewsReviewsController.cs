@@ -42,13 +42,13 @@ namespace MyCompany.Areas.Admin.Controllers
 					{
 						if (newsMessage.TitleImagePath != null)
 						{
-							FileInfo file = new FileInfo(newsMessage.TitleImagePath);
+							FileInfo file = new FileInfo(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath));
 							if (file.Exists)
 								file.Delete();
 						}
 
-						newsMessage.TitleImagePath = Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", Guid.NewGuid().ToString("N") + titleImageFile.FileName);
-						using (var stream = new FileStream(newsMessage.TitleImagePath, FileMode.Create))
+						newsMessage.TitleImagePath = Guid.NewGuid().ToString("N") + titleImageFile.FileName;
+						using (var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath), FileMode.Create))
 							titleImageFile.CopyTo(stream);
 					}
 
@@ -69,7 +69,7 @@ namespace MyCompany.Areas.Admin.Controllers
 				ResponseBody = newsMessage.ResponsetText,
 				DateSent = newsMessage.DateAdded,
 				UserBody = new string(newsMessage.Subtitle + "" + newsMessage.Text),
-				TitleImagePath = newsMessage.TitleImagePath
+				TitleImagePath = Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath)
 			};
 			await mailService.SendEmailAsync(entity);
 
