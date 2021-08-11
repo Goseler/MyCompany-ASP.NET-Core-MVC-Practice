@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using MyCompany.Domain;
 using MyCompany.Domain.Entities;
 using MyCompany.Service;
@@ -41,7 +42,18 @@ namespace MyCompany.Areas.Admin.Controllers
 					using var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", model.TitleImagePath), FileMode.Create);
 					titleImageFile.CopyTo(stream);
 				}
-				dataManager.NewsItems.SaveNewsItem(model);
+
+				try
+				{
+					dataManager.NewsItems.SaveNewsItem(model);
+				}
+				catch (Exception ex)
+				{
+					if (ex.InnerException.Message.Contains("Повторяющееся значение ключа: "))
+						ModelState.AddModelError(string.Empty, "Новость уже сущетствует");
+
+					return View(model);
+				}
 				return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
 			}
 			return View(model);

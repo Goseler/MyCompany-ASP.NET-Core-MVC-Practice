@@ -1,4 +1,6 @@
-﻿using MyCompany.Domain.Entities;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using MyCompany.Domain.Entities;
 using MyCompany.Domain.Repositories.Abstract;
 using System;
 using System.Linq;
@@ -21,8 +23,17 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 				_context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Added;
 			else
 				_context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+			
+			try
+			{
+				_context.SaveChanges();
+			}
+			catch (SqlException)
+			{
+				
+				throw new Exception();
+			}
 
-			_context.SaveChanges();
 		}
 
 		public void DeleteNewsItem(Guid id)

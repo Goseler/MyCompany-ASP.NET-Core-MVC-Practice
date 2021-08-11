@@ -49,9 +49,21 @@ namespace MyCompany.Areas.Admin.Controllers
 					}
 
 					// Add News to DB
-					NewsItem newsItem = new NewsItem();
+					NewsItem newsItem = new();
 					newsItem = newsMessage.ConvertToNews();
-					dataManager.NewsItems.SaveNewsItem(newsItem);
+
+					try
+					{
+						dataManager.NewsItems.SaveNewsItem(newsItem);
+					}
+					catch (Exception ex)
+					{
+						// NullReferenceException: Object reference not set to an instance of an object.
+						if (ex.InnerException.Message.Contains("Повторяющееся значение ключа: "))
+							ModelState.AddModelError(string.Empty, "Новость уже сущетствует");
+
+						return View(newsMessage);
+					}
 				}
 				else
 					return View(newsMessage);

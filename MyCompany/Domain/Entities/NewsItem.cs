@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyCompany.Domain.Entities
 {
+	[Index(nameof(Title), IsUnique = true)]
 	public class NewsItem : EntityBase
 	{
 		[Required(ErrorMessage = "Заполните название новости")]
