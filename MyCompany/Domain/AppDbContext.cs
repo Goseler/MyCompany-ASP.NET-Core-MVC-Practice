@@ -3,19 +3,15 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MyCompany.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCompany.Domain
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
-    {
+	public class AppDbContext : IdentityDbContext<IdentityUser>
+	{
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-		
-        public DbSet<TextField> TextFields { get; set; }
-        public DbSet<ServiceItem> ServiceItems { get; set; }
+
+		public DbSet<TextField> TextFields { get; set; }
+		public DbSet<ServiceItem> ServiceItems { get; set; }
 		public DbSet<NewsItem> NewsItems { get; set; }
 		public DbSet<TechMessage> TechMessages { get; set; }
 		public DbSet<NewsMessage> NewsMessages { get; set; }

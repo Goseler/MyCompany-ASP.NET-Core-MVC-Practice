@@ -9,16 +9,16 @@ namespace MyCompany.Areas.Admin.Controllers
 	public class TextFieldsController : Controller
 	{
 		private readonly DataManager dataManager;
-		public TextFieldsController(DataManager dataManager)
-		{
-			this.dataManager = dataManager;
-		}
+
+		public TextFieldsController(DataManager dataManager) => this.dataManager = dataManager;
 
 		public IActionResult Edit(string codeWord)
 		{
 			var entity = dataManager.TextFields.GetTextFieldByCodeWord(codeWord);
+
 			if (codeWord == "PageServices" || codeWord == "PageNews")
 				ViewBag.IsText = false;
+
 			return View(entity);
 		}
 

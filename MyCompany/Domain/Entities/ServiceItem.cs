@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MyCompany.Domain.Entities
 {
-    public class ServiceItem : EntityBase
-    {
+	public class ServiceItem : EntityBase
+	{
 		[Required(ErrorMessage = "Заполните название услуги")]
 		[Display(Name = "Название услуги")]
 		public override string Title { get; set; }

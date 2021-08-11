@@ -42,15 +42,9 @@ namespace MyCompany.Areas.Admin.Controllers
 					if (titleImageFile != null)
 					{
 						FileManager.Delete(newsMessage.TitleImagePath, "images/uploads/", webHostEnvironment);
-						//if (newsMessage.TitleImagePath != null)
-						//{
-						//	FileInfo file = new FileInfo(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath));
-						//	if (file.Exists)
-						//		file.Delete();
-						//}
 
 						newsMessage.TitleImagePath = Guid.NewGuid().ToString("N") + titleImageFile.FileName;
-						using (var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath), FileMode.Create))
+						using var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath), FileMode.Create);
 							titleImageFile.CopyTo(stream);
 					}
 

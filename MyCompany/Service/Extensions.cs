@@ -6,24 +6,22 @@ namespace MyCompany.Service
 {
 	public static class Extensions
 	{
-		public static string CutController(this string str) 
-		{ 
-			return str.Replace("Controller", ""); 
-		}
+		public static string CutController(this string str) => str.Replace("Controller", "");
 
 		public static NewsItem ConvertToNews(this NewsMessage newsMessage)
 		{
-			NewsItem newsItem = new NewsItem();
-
-			newsItem.Id = newsMessage.Id;
-			newsItem.DateAdded = newsMessage.DateAdded;
-			newsItem.Title = newsMessage.Title;
-			newsItem.Subtitle = newsMessage.Subtitle;
-			newsItem.Text = newsMessage.Text;
-			newsItem.TitleImagePath = newsMessage.TitleImagePath;
-			newsItem.MetaTitle = newsMessage.MetaTitle;
-			newsItem.MetaDescription = newsMessage.MetaDescription;
-			newsItem.MetaKeywords = newsMessage.MetaKeywords;
+			NewsItem newsItem = new()
+			{
+				Id = newsMessage.Id,
+				DateAdded = newsMessage.DateAdded,
+				Title = newsMessage.Title,
+				Subtitle = newsMessage.Subtitle,
+				Text = newsMessage.Text,
+				TitleImagePath = newsMessage.TitleImagePath,
+				MetaTitle = newsMessage.MetaTitle,
+				MetaDescription = newsMessage.MetaDescription,
+				MetaKeywords = newsMessage.MetaKeywords
+			};
 
 			return newsItem;
 		}
@@ -39,9 +37,7 @@ namespace MyCompany.Service
 						file.Delete();
 				}
 				else
-				{
-					throw new System.ArgumentNullException();
-				}
+					throw new System.ArgumentNullException("", "Файл не существует");
 			}
 		}
 

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,19 +9,14 @@ using Microsoft.Extensions.Hosting;
 using MyCompany.Domain;
 using MyCompany.Domain.Repositories.Abstract;
 using MyCompany.Domain.Repositories.EntityFramework;
-using MyCompany.Models;
 using MyCompany.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyCompany
 {
 	public class Startup
 	{
 		public IConfiguration Configuration { get; }
-		public Startup(IConfiguration configuration ) => Configuration = configuration;
+		public Startup(IConfiguration configuration) => Configuration = configuration;
 
 		public void ConfigureServices(IServiceCollection services)
 		{
@@ -87,7 +81,7 @@ namespace MyCompany
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
-			if (env.IsDevelopment()) 
+			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
 
 			app.UseStaticFiles();
