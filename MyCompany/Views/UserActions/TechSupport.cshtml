@@ -4,6 +4,8 @@
     ViewBag.Title = strTitle;
 }
 
+<script src="~/js/ckeditor5/build/ckeditor.js"></script>
+
 <div>
     <h2>@strTitle</h2>
     <div>
@@ -24,10 +26,95 @@
             </div>
             <div class="div-box">
                 <label asp-for="Text"></label>
-                <textarea asp-for="Text"></textarea>
+                <textarea asp-for="Text" id="editor"></textarea>
                 <span asp-validation-for="Text"></span>
             </div>
             <input type="submit" value="Отправить" />
         </form>
     </div>
 </div>
+
+<script>
+    const watchdog = new CKSource.EditorWatchdog();
+
+    window.watchdog = watchdog;
+
+    watchdog.setCreator((element, config) => {
+        return CKSource.Editor
+            .create(element, config)
+            .then(editor => {
+
+
+
+
+                return editor;
+            })
+    });
+
+    watchdog.setDestructor(editor => {
+
+
+
+        return editor.destroy();
+    });
+
+    watchdog.on('error', handleError);
+
+    watchdog
+        .create(document.querySelector('#editor'), {
+
+            toolbar: {
+                items: [
+                    'heading',
+                    '|',
+                    'fontSize',
+                    'bold',
+                    'italic',
+                    'underline',
+                    'link',
+                    'fontFamily',
+                    'fontBackgroundColor',
+                    'fontColor',
+                    '|',
+                    'findAndReplace',
+                    'outdent',
+                    'indent',
+                    'alignment',
+                    'bulletedList',
+                    'numberedList',
+                    '|',
+                    'highlight',
+                    'horizontalLine',
+                    'blockQuote',
+                    'insertTable',
+                    'mediaEmbed',
+                    'specialCharacters',
+                    'undo',
+                    'redo'
+                ]
+            },
+            language: 'ru',
+            table: {
+                contentToolbar: [
+                    'tableColumn',
+                    'tableRow',
+                    'mergeTableCells',
+                    'tableCellProperties',
+                    'tableProperties'
+                ]
+            },
+            licenseKey: '',
+
+
+
+        })
+        .catch(handleError);
+
+    function handleError(error) {
+        console.error('Oops, something went wrong!');
+        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+        console.warn('Build id: wvlz1qvwy9e3-mtx0289es78g');
+        console.error(error);
+    }
+
+</script>

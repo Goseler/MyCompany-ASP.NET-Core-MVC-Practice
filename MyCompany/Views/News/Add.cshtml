@@ -64,7 +64,32 @@
 
 
 <script>
-    ClassicEditor
+    const watchdog = new CKSource.EditorWatchdog();
+
+    window.watchdog = watchdog;
+
+    watchdog.setCreator((element, config) => {
+        return CKSource.Editor
+            .create(element, config)
+            .then(editor => {
+
+
+
+
+                return editor;
+            })
+    });
+
+    watchdog.setDestructor(editor => {
+
+
+
+        return editor.destroy();
+    });
+
+    watchdog.on('error', handleError);
+
+    watchdog
         .create(document.querySelector('#editor'), {
 
             toolbar: {
@@ -72,39 +97,39 @@
                     'heading',
                     '|',
                     'fontSize',
-                    'fontFamily',
                     'bold',
                     'italic',
                     'underline',
-                    'alignment',
                     'link',
-                    'bulletedList',
-                    'numberedList',
+                    'fontFamily',
                     'fontBackgroundColor',
                     'fontColor',
-                    'removeFormat',
                     '|',
+                    'findAndReplace',
                     'outdent',
                     'indent',
+                    'alignment',
+                    'bulletedList',
+                    'numberedList',
                     '|',
+                    /*'highlight',*/
                     'horizontalLine',
-                    'imageUpload',
-                    'imageInsert',
-                    'blockQuote',
+                    /*'blockQuote',*/
                     'insertTable',
-                    'mediaEmbed',
+                    /*'mediaEmbed',*/
+                    'specialCharacters',
                     'undo',
                     'redo'
                 ]
             },
             language: 'ru',
-            image: {
-                toolbar: [
-                    'imageTextAlternative',
-                    'imageStyle:inline',
-                    'imageStyle:block',
-                    'imageStyle:side',
-                    'linkImage'
+            table: {
+                contentToolbar: [
+                    'tableColumn',
+                    'tableRow',
+                    'mergeTableCells',
+                    'tableCellProperties',
+                    'tableProperties'
                 ]
             },
             licenseKey: '',
@@ -112,17 +137,13 @@
 
 
         })
-        .then(editor => {
-            window.editor = editor;
+        .catch(handleError);
 
+    function handleError(error) {
+        console.error('Oops, something went wrong!');
+        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+        console.warn('Build id: wvlz1qvwy9e3-mtx0289es78g');
+        console.error(error);
+    }
 
-
-
-        })
-        .catch(error => {
-            console.error('Oops, something went wrong!');
-            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-            console.warn('Build id: wvck6bhp110q-bymooh4ulygn');
-            console.error(error);
-        });
 </script>

@@ -34,9 +34,6 @@
 					<div class="editor-container">
 						<div class="editor">
 							<h2>Bilingual Personality Disorder</h2>
-							<figure class="image image-style-side"><img src="https://c.cksource.com/a/1/img/docs/sample-image-bilingual-personality-disorder.jpg">
-								<figcaption>One language, one person.</figcaption>
-							</figure>
 							<p>
 								This may be the first time you hear about this made-up disorder but
 								it actually isn’t so far from the truth. Even the studies that were conducted almost half a century show that
@@ -104,7 +101,33 @@
 			</p>
 		</footer>
 		<script src="../build/ckeditor.js"></script>
-		<script>ClassicEditor
+		<script>
+			const watchdog = new CKSource.EditorWatchdog();
+			
+			window.watchdog = watchdog;
+			
+			watchdog.setCreator( ( element, config ) => {
+				return CKSource.Editor
+					.create( element, config )
+					.then( editor => {
+						
+						
+						
+			
+						return editor;
+					} )
+			} );
+			
+			watchdog.setDestructor( editor => {
+				
+				
+			
+				return editor.destroy();
+			} );
+			
+			watchdog.on( 'error', handleError );
+			
+			watchdog
 				.create( document.querySelector( '.editor' ), {
 					
 				toolbar: {
@@ -112,39 +135,39 @@
 						'heading',
 						'|',
 						'fontSize',
-						'fontFamily',
 						'bold',
 						'italic',
 						'underline',
-						'alignment',
 						'link',
-						'bulletedList',
-						'numberedList',
+						'fontFamily',
 						'fontBackgroundColor',
 						'fontColor',
-						'removeFormat',
 						'|',
+						'findAndReplace',
 						'outdent',
 						'indent',
+						'alignment',
+						'bulletedList',
+						'numberedList',
 						'|',
+						'highlight',
 						'horizontalLine',
-						'imageUpload',
-						'imageInsert',
 						'blockQuote',
 						'insertTable',
 						'mediaEmbed',
+						'specialCharacters',
 						'undo',
 						'redo'
 					]
 				},
 				language: 'ru',
-				image: {
-					toolbar: [
-						'imageTextAlternative',
-						'imageStyle:inline',
-						'imageStyle:block',
-						'imageStyle:side',
-						'linkImage'
+				table: {
+					contentToolbar: [
+						'tableColumn',
+						'tableRow',
+						'mergeTableCells',
+						'tableCellProperties',
+						'tableProperties'
 					]
 				},
 					licenseKey: '',
@@ -152,19 +175,15 @@
 					
 					
 				} )
-				.then( editor => {
-					window.editor = editor;
+				.catch( handleError );
 			
-					
-					
-					
-				} )
-				.catch( error => {
-					console.error( 'Oops, something went wrong!' );
-					console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
-					console.warn( 'Build id: wvck6bhp110q-bymooh4ulygn' );
-					console.error( error );
-				} );
+			function handleError( error ) {
+				console.error( 'Oops, something went wrong!' );
+				console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+				console.warn( 'Build id: wvlz1qvwy9e3-mtx0289es78g' );
+				console.error( error );
+			}
+			
 		</script>
 	</body>
 </html>

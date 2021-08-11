@@ -17,7 +17,7 @@ footer, header, hgroup, menu, nav, output, ruby,
 section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
-  border: 0;
+  /*border: 0;*/
   font-size: 100%;
   font: inherit;
   vertical-align: baseline; }
@@ -39,8 +39,8 @@ blockquote, q {
     content: none; }
 
 table {
-  border-collapse: collapse;
-  border-spacing: 0; }
+  /*border-collapse: collapse;
+		border-spacing: 0;*/ }
 
 body {
   -webkit-text-size-adjust: none; }
@@ -82,7 +82,7 @@ h1, h2, h3, h4 {
   font-weight: normal; }
 
 h1 {
-  text-transform: lowercase; }
+  text-transform: initial; }
 
 h2 {
   text-transform: lowercase;
@@ -1203,4 +1203,4 @@ ul.link-list li {
   margin: 0 auto; }
 
 #nav a {
-  text-transform: capitalize; }
+  text-transform: initial; }
