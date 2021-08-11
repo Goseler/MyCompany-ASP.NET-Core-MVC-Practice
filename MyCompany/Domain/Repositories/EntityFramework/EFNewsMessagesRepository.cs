@@ -36,7 +36,7 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 			NewsMessage entity = _context.NewsMessages.FirstOrDefault(x => x.Id == id);
 			if(entity != null)
 			{
-				_context.Remove(entity);
+				_context.NewsMessages.Remove(entity);
 			}
 			else
 			{

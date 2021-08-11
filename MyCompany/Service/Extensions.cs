@@ -1,4 +1,6 @@
-﻿using MyCompany.Domain.Entities;
+﻿using Microsoft.AspNetCore.Hosting;
+using MyCompany.Domain.Entities;
+using System.IO;
 
 namespace MyCompany.Service
 {
@@ -25,5 +27,23 @@ namespace MyCompany.Service
 
 			return newsItem;
 		}
+
+		public static class FileManager
+		{
+			public static void Delete(string name, string path, IWebHostEnvironment webHostEnvironment)
+			{
+				if (name != null)
+				{
+					FileInfo file = new FileInfo(Path.Combine(webHostEnvironment.WebRootPath, path, name));
+					if (file.Exists)
+						file.Delete();
+				}
+				else
+				{
+					throw new System.ArgumentNullException();
+				}
+			}
+		}
+
 	}
 }

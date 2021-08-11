@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MyCompany.Service.Extensions;
 
 namespace MyCompany.Controllers
 {
@@ -48,13 +49,6 @@ namespace MyCompany.Controllers
 			{
                 if (titleImageFile != null)
                 {
-                    if (newsMessage.TitleImagePath != null)
-                    {
-                        FileInfo file = new FileInfo(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath));
-                        if (file.Exists)
-                            file.Delete();
-                    }
-
                     newsMessage.TitleImagePath = Guid.NewGuid().ToString("N") + titleImageFile.FileName;
                     using (var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath), FileMode.Create))
                         titleImageFile.CopyTo(stream);

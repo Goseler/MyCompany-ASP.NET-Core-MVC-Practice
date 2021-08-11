@@ -14,17 +14,17 @@ namespace MyCompany.Areas.Admin.Controllers
     [Area("Admin")]
     public class UsersMessagesController : Controller
     {
-        private readonly DataManager _dataManager;
-        private readonly IMailService _mailService;
+        private readonly DataManager dataManager;
+        private readonly IMailService mailService;
         public UsersMessagesController(DataManager dataManager, IMailService mailService)
 		{
-            _dataManager = dataManager;
-            _mailService = mailService;
+            this.dataManager = dataManager;
+            this.mailService = mailService;
         }
 
         public IActionResult Index(Guid id)
 		{
-            TechMessage techMessage = _dataManager.TechMessages.GetTechMessageById(id);
+            TechMessage techMessage = dataManager.TechMessages.GetTechMessageById(id);
             MailRequest entity = new MailRequest() { Subject = techMessage.Title, ToEmail = techMessage.Email, UserBody = techMessage.Text, DateSent=techMessage.DateSent};
             if(entity == null)
 			{
@@ -38,7 +38,7 @@ namespace MyCompany.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-                await _mailService.SendEmailAsync(request);
+                await mailService.SendEmailAsync(request);
                 return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
             }
             return View(request);
@@ -47,7 +47,7 @@ namespace MyCompany.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(Guid id)
 		{
-            _dataManager.TechMessages.DeleteTechMessage(id);
+            dataManager.TechMessages.DeleteTechMessage(id);
             return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
         }
     }

@@ -10,39 +10,47 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 {
 	public class EFNewsItemsReposiitory : INewsItemsRepository
 	{
-		private readonly AppDbContext context;
+		private readonly AppDbContext _context;
 		public EFNewsItemsReposiitory(AppDbContext context)
 		{
-			this.context = context;
+			_context = context;
 		}
 
 		public IQueryable<NewsItem> GetNewsItems()
 		{
-			return context.NewsItems;
+			return _context.NewsItems;
 		}
 
 		public NewsItem GetNewsItemById(Guid id)
 		{
-			return context.NewsItems.FirstOrDefault(x => x.Id == id);
+			return _context.NewsItems.FirstOrDefault(x => x.Id == id);
 		}
 
 		public void SaveNewsItem(NewsItem entity)
 		{
-			if (entity.Id == default || GetNewsItemById(entity.Id) == null)
+			if (entity.Id == default)
 			{
-				context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+				_context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Added;
 			}
 			else
 			{
-				context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+				_context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 			}
-			context.SaveChanges();
+			_context.SaveChanges();
 		}
 
 		public void DeleteNewsItem(Guid id)
 		{
-			context.NewsItems.Remove(new NewsItem() { Id = id });
-			context.SaveChanges();
+			NewsItem entity = _context.NewsItems.FirstOrDefault(x => x.Id == id);
+			if (entity != null)
+			{
+				_context.NewsItems.Remove(entity);
+			}
+			else
+			{
+				throw new ArgumentException("Ошибка удаления. Новость не существует");
+			}
+			_context.SaveChanges();
 		}
 	}
 }

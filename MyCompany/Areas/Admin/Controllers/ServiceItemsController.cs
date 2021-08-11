@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyCompany.Domain;
 using MyCompany.Domain.Entities;
 using MyCompany.Service;
+using static MyCompany.Service.Extensions;
 
 namespace MyCompany.Areas.Admin.Controllers
 {
@@ -32,12 +33,7 @@ namespace MyCompany.Areas.Admin.Controllers
             {
                 if (titleImageFile != null)
                 {
-                    if (model.TitleImagePath != null)
-                    {
-                        FileInfo file = new FileInfo(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", model.TitleImagePath));
-                        if (file.Exists)
-                            file.Delete();
-                    }
+                    FileManager.Delete(model.TitleImagePath, "images/uploads/", webHostEnvironment);
 
                     model.TitleImagePath = Guid.NewGuid().ToString("N") + titleImageFile.FileName;
                     using (var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", model.TitleImagePath), FileMode.Create))
@@ -54,6 +50,8 @@ namespace MyCompany.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(Guid id)
         {
+            FileManager.Delete(dataManager.ServiceItems.GetServiceItemById(id).TitleImagePath, "images/uploads/", webHostEnvironment);
+
             dataManager.ServiceItems.DeleteServiceItem(id);
             return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
         }

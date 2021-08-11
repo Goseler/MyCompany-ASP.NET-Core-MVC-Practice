@@ -46,7 +46,16 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 
 		public void DeleteTextField(Guid id)
 		{
-			context.TextFields.Remove(new TextField() { Id = id });
+			TextField entity = context.TextFields.FirstOrDefault(x => x.Id == id);
+			if (entity != null)
+			{
+				context.TextFields.Remove(entity);
+			}
+			else
+			{
+				throw new ArgumentException("Ошибка удаления. Сообщение не существует");
+			}
+
 			context.SaveChanges();
 		}
 	}
