@@ -1,6 +1,6 @@
 ﻿@model NewsItem
 @{
-    string strTitle = "Редактировать новость";
+    string strTitle = "Редактировать/добавить новость";
     ViewBag.Title = strTitle;
 }
 
@@ -34,7 +34,10 @@
                 <label asp-for="TitleImagePath"></label>
                 <input type="file" name="titleImageFile" id="titleImageFile" />
                 <div>
-                    <img class="img-block" src="~/images/uploads/@Model.TitleImagePath" />
+                    @if (Model.TitleImagePath != null)
+                    {
+                        <img class="img-block" src="~/images/uploads/@Model.TitleImagePath" />
+                    }
                 </div>
             </div>
             <div class="div-box">

@@ -3,11 +3,12 @@
 <head>
     @{ await Html.RenderPartialAsync("MetatagsPartial");}
     @{ await Html.RenderPartialAsync("CssPartial");}
-    @{ await Html.RenderPartialAsync("ScriptsPartial");}
+
     
 </head>
 <body>
     <div id="page-wrapper">
+        @{ await Html.RenderPartialAsync("ScriptsPartial");}
         @{ await Html.RenderPartialAsync("HeaderPartial");}
         <div id="main">
             <div class="container">
