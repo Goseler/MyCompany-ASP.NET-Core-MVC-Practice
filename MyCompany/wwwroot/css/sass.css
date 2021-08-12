@@ -85,7 +85,7 @@ h1 {
   text-transform: initial; }
 
 h2 {
-  text-transform: lowercase;
+  text-transform: initial;
   font-size: 1.6em;
   letter-spacing: -1px;
   margin-bottom: 1em; }
