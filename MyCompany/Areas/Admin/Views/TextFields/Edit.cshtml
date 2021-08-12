@@ -17,7 +17,7 @@
             <div asp-validation-summary="All"></div>
             <div class="div-box">
                 <label asp-for="Title"></label>
-                <input asp-for="Title" />
+                <input asp-for="Title" readonly/>
                 <span asp-validation-for="Title"></span>
             </div>
             @if (ViewBag.IsText == null)
