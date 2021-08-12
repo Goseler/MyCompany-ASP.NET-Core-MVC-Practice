@@ -1,18 +1,15 @@
-﻿@model IQueryable<ServiceItem>
+﻿@model ServiceViewModel
 @{
-    TextField textField = ViewBag.TextField;
-
-    ViewBag.Title = textField.MetaTitle;
-    ViewBag.Description = textField.MetaDescription;
-    ViewBag.KeyWords = textField.MetaKeywords;
-
+    ViewBag.Title = Model.TextField.MetaTitle;
+    ViewBag.Description = Model.TextField.MetaDescription;
+    ViewBag.KeyWords = Model.TextField.MetaKeywords;
 }
 
 <div>
-    @if (Model.Any())
+    @if (Model.ServiceItems.Any())
     {
         <ul class="big-image-list">
-            @foreach (ServiceItem entity in Model)
+            @foreach (ServiceItem entity in Model.ServiceItems)
             {
                 <li>
                     <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
@@ -23,5 +20,6 @@
                 </li>
             }
         </ul>
+        <page-link page-model="Model.PageViewModel" page-action="Index"></page-link>
     }
 </div>

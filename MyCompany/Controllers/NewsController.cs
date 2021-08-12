@@ -9,8 +9,6 @@ using System;
 using System.IO;
 using System.Linq;
 using static MyCompany.Service.Extensions;
-using PagedList;
-using PagedList.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -35,7 +33,7 @@ namespace MyCompany.Controllers
 			IQueryable<NewsItem> newsItems = dataManager.NewsItems.GetNewsItems();
 			TextField textField = dataManager.TextFields.GetTextFieldByCodeWord("PageNews"); ;
 
-			int pageSize = 5;
+			int pageSize = 7;
 			var count = await newsItems.CountAsync();
 			var items = await newsItems.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 			PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);

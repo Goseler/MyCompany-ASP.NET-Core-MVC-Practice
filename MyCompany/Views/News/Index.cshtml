@@ -1,35 +1,10 @@
 ﻿@model NewsViewModel
-@using MyCompany.Models
 @{
     ViewBag.Title = Model.TextField.MetaTitle;
     ViewBag.Description = Model.TextField.MetaDescription;
     ViewBag.KeyWords = Model.TextField.MetaKeywords;
 }
-    <style>
-        @@font-face {
-            font-family: 'FontAwesome';
-            src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal
-        }
 
-        .glyphicon {
-            display: inline-block;
-            font: normal normal normal 14px/1 FontAwesome;
-            font-size: inherit;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale
-        }
-
-        .glyphicon-chevron-right:before {
-            content: "\f054";
-        }
-
-        .glyphicon-chevron-left:before {
-            content: "\f053";
-        }
-    </style>
 <div style="margin-bottom:50px;">
     <input type="button" value="Добавить новость" onclick="location.href='@Url.Action("Add", "News")'" />
 </div>
