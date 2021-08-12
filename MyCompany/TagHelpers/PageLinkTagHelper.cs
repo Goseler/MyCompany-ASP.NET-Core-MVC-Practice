@@ -14,7 +14,7 @@ namespace MyCompany.TagHelpers
 {
     public class PageLinkTagHelper : TagHelper
     {
-        private IUrlHelperFactory _urlHelperFactory;
+        private readonly IUrlHelperFactory _urlHelperFactory;
 
         public PageLinkTagHelper(IUrlHelperFactory urlHelperFactory)
 		{

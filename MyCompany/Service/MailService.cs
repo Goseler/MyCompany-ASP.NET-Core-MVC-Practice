@@ -23,24 +23,24 @@ namespace MyCompany.Service
 		{
 			try
 			{
-				System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
-				message.IsBodyHtml = true; //тело сообщения в формате HTML
-				message.From = new MailAddress(_mailSettings.Mail, _mailSettings.DisplayName); //отправитель сообщения
+				MailMessage message = new()
+				{
+					IsBodyHtml = true, //тело сообщения в формате HTML
+					From = new MailAddress(_mailSettings.Mail, _mailSettings.DisplayName) //отправитель сообщения
+				};
 				message.To.Add(mailRequest.ToEmail); //адресат сообщения
 				message.Subject = mailRequest.Subject; //тема сообщения
 				message.Body = new string("<div>" + mailRequest.ResponseBody + "<br/>" + mailRequest.DateSent.ToString("MMM , dd, yyyy") + "<br/><br/><br/>" + "</div>" + mailRequest.UserBody); //тело сообщения
 				message.Attachments.Add(new Attachment(mailRequest.TitleImagePath)); //добавить вложение к письму при необходимости
-				//var builder = new BodyBuilder();
+																					 //var builder = new BodyBuilder();
 
-				using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient(_mailSettings.Host)) //используем сервера Advantiss
-				{
-					client.Credentials = new NetworkCredential(_mailSettings.Mail, _mailSettings.Password); //логин-пароль от аккаунта
-					client.Port = _mailSettings.Port; //порт 587 либо 465
-					//client.EnableSsl = true; //SSL обязательно
+				using SmtpClient client = new(_mailSettings.Host); //используем сервера Advantiss
+				client.Credentials = new NetworkCredential(_mailSettings.Mail, _mailSettings.Password); //логин-пароль от аккаунта
+				client.Port = _mailSettings.Port; //порт 587 либо 465
+												  //client.EnableSsl = true; //SSL обязательно
 
-					await client.SendMailAsync(message);
-					_logger.LogInformation("Сообщение отправлено успешно!");
-				}
+				await client.SendMailAsync(message);
+				_logger.LogInformation("Сообщение отправлено успешно!");
 			}
 			catch (Exception e)
 			{

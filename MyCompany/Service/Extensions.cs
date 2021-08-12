@@ -32,7 +32,7 @@ namespace MyCompany.Service
 			{
 				if (name != null)
 				{
-					FileInfo file = new FileInfo(Path.Combine(webHostEnvironment.WebRootPath, path, name));
+					FileInfo file = new(Path.Combine(webHostEnvironment.WebRootPath, path, name));
 					if (file.Exists)
 						file.Delete();
 				}

@@ -73,7 +73,7 @@ namespace MyCompany.Areas.Admin.Controllers
 			}
 
 			// Send Email
-			MailRequest mailRequest = new MailRequest()
+			MailRequest mailRequest = new()
 			{
 				Subject = new string("Рецензия на новсть: " + newsMessage.Title),
 				ToEmail = newsMessage.Email,

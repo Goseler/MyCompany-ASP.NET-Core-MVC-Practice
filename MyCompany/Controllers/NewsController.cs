@@ -36,7 +36,7 @@ namespace MyCompany.Controllers
 			int pageSize = 7;
 			var count = await newsItems.CountAsync();
 			var items = await newsItems.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-			PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+			PageViewModel pageViewModel = new(count, page, pageSize);
 
 			NewsViewModel newsViewModel = new() { NewsItems = items, TextField = textField, PageViewModel = pageViewModel};
 
