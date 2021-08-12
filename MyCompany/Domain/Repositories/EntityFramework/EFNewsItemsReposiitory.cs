@@ -28,10 +28,10 @@ namespace MyCompany.Domain.Repositories.EntityFramework
 			{
 				_context.SaveChanges();
 			}
-			catch (SqlException)
+			catch (SqlException ex)
 			{
 				
-				throw new Exception();
+				throw new Exception(ex.Message);
 			}
 
 		}

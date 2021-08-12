@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using MyCompany.Domain;
 using MyCompany.Domain.Entities;
 using MyCompany.Models;
@@ -18,12 +19,14 @@ namespace MyCompany.Areas.Admin.Controllers
 		private readonly DataManager dataManager;
 		private readonly IWebHostEnvironment webHostEnvironment;
 		private readonly IMailService mailService;
+		private readonly ILogger<NewsReviewsController> logger;
 
-		public NewsReviewsController(DataManager dataManager, IWebHostEnvironment webHostEnvironment, IMailService mailService)
+		public NewsReviewsController(DataManager dataManager, IWebHostEnvironment webHostEnvironment, IMailService mailService, ILogger<NewsReviewsController> logger)
 		{
 			this.dataManager = dataManager;
 			this.webHostEnvironment = webHostEnvironment;
 			this.mailService = mailService;
+			this.logger = logger;
 		}
 		public IActionResult Review(Guid id)
 		{
@@ -45,12 +48,11 @@ namespace MyCompany.Areas.Admin.Controllers
 
 						newsMessage.TitleImagePath = Guid.NewGuid().ToString("N") + titleImageFile.FileName;
 						using var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath), FileMode.Create);
-							titleImageFile.CopyTo(stream);
+						titleImageFile.CopyTo(stream);
 					}
 
 					// Add News to DB
-					NewsItem newsItem = new();
-					newsItem = newsMessage.ConvertToNews();
+					NewsItem newsItem = newsMessage.ConvertToNews();
 
 					try
 					{
@@ -58,11 +60,12 @@ namespace MyCompany.Areas.Admin.Controllers
 					}
 					catch (Exception ex)
 					{
-						// NullReferenceException: Object reference not set to an instance of an object.
-						if (ex.InnerException.Message.Contains("Повторяющееся значение ключа: "))
+						if (ex.GetBaseException().Message.Contains("Повторяющееся значение ключа: "))
+						{
 							ModelState.AddModelError(string.Empty, "Новость уже сущетствует");
-
-						return View(newsMessage);
+							return View(newsMessage);
+						}
+						logger.LogError(ex.GetBaseException().Message);
 					}
 				}
 				else

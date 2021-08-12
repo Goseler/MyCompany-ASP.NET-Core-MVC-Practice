@@ -12,7 +12,7 @@ namespace MyCompany.Service
 		{
 			NewsItem newsItem = new()
 			{
-				Id = newsMessage.Id,
+				//Id = newsMessage.Id,
 				DateAdded = newsMessage.DateAdded,
 				Title = newsMessage.Title,
 				Subtitle = newsMessage.Subtitle,
