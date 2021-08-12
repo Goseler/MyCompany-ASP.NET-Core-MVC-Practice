@@ -65,6 +65,9 @@
     </div>
 </div>
 
+@section sidebar{
+    @{await Html.RenderPartialAsync("SidebarPartial"); }
+}
 
 <script>
     const watchdog = new CKSource.EditorWatchdog();

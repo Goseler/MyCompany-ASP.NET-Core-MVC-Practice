@@ -16,3 +16,7 @@
 <div>
     @Html.Raw(Model.Text)
 </div>
+
+@section sidebar{
+    @{await Html.RenderPartialAsync("SidebarPartial"); }
+}

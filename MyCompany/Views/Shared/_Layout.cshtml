@@ -16,7 +16,8 @@
                     <div class="col-8 col-12-medium">
                         @RenderBody()
                     </div>
-                    @{await Html.RenderPartialAsync("SidebarPartial"); }
+                    @RenderSection("sidebar", false)
+                    @*@{await Html.RenderPartialAsync("SidebarPartial"); }*@
                 </div>
             </div>
         </div>
