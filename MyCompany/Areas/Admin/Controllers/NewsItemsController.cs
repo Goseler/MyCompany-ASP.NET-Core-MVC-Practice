@@ -65,6 +65,7 @@ namespace MyCompany.Areas.Admin.Controllers
 			FileManager.Delete(dataManager.NewsItems.GetNewsItemById(id).TitleImagePath, "images/uploads/", webHostEnvironment);
 
 			dataManager.NewsItems.DeleteNewsItem(id);
+			@ViewBag.ActiveOption = "News";
 			return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
 		}
 	}

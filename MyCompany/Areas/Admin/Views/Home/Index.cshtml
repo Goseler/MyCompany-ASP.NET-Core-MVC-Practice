@@ -8,7 +8,7 @@
 
     <div>
         <label>Выберите страницу для редактирования: </label>
-        <select class="changeStatus" name="changeStatus">
+        <select id="changeStatus" name="changeStatus" onchange="getActiveVal()" >
             <option value="Main">Страницы сайта</option>
             <option value="Services">Наши услуги</option>
             <option value="News">Новости</option>
@@ -27,15 +27,51 @@
     </div>
 
 <script>
-    $('select.changeStatus').change(function () {
+    $('select#changeStatus').change(function () {
         $.ajax({
             url: '@Url.Action("Index", "Home")',
-            data: { Page: $('select.changeStatus').val() },
+            data: { Page: $('select#changeStatus').val() },
             type: 'POST',
             success: function (data) {
                 $("#results").html(data);
             }
         });
     });
+
+    //on click select get val
+    //handle on select_click save in local storage value
+    //then default select from local storage or null - Main
+    //val activeNow;
+    //....
+    //if (activeNow === null) {
+    //    activeNow = 'Main';
+    //}
+    //localStorage.setItem('ActiveOption', activeNow);
+    //val act = localStorage.getItem('ActiveOption');
+
+    $(function () {
+        var defaultOption = window.localStorage.getItem('ActiveOption');
+        console.log(defaultOption);
+        if (defaultOption == null) {
+            defaultOption = 'Main';
+        }
+        $("#changeStatus").val(defaultOption);
+    });
+
+    function getActiveVal() {
+        var activeNow = document.getElementById('#changeStatus').value;
+        console.log('value: ' + activeNow.toString() );
+        window.localStorage.setItem('ActiveOption', activeNow);
+    }
+
+    $('#changeStatus').change(function() {
+        var activeNow = document.getElementById('#changeStatus').val();
+        if (activeNow == null) {
+            activeNow = "Main";
+        }
+        console.log(activeNow + " value");
+    });
+
+
 </script>
 
