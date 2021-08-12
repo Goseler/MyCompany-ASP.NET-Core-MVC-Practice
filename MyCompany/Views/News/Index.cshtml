@@ -1,33 +1,60 @@
 ﻿@model NewsViewModel
-@{ 
-	ViewBag.Title = Model.TextField.MetaTitle;
-	ViewBag.Description = Model.TextField.MetaDescription;
-	ViewBag.KeyWords = Model.TextField.MetaKeywords;
+@using MyCompany.Models
+@{
+    ViewBag.Title = Model.TextField.MetaTitle;
+    ViewBag.Description = Model.TextField.MetaDescription;
+    ViewBag.KeyWords = Model.TextField.MetaKeywords;
 }
+    <style>
+        @@font-face {
+            font-family: 'FontAwesome';
+            src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal
+        }
 
+        .glyphicon {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        .glyphicon-chevron-right:before {
+            content: "\f054";
+        }
+
+        .glyphicon-chevron-left:before {
+            content: "\f053";
+        }
+    </style>
 <div style="margin-bottom:50px;">
-    <input type="button" value="Добавить новость" onclick="location.href='@Url.Action("Add", "News")'"/>
+    <input type="button" value="Добавить новость" onclick="location.href='@Url.Action("Add", "News")'" />
 </div>
 <div>
-	@if (Model.NewsItems.Any())
-	{
-		<ul class="big-image-list">
-			@foreach (NewsItem entity in Model.NewsItems)
-			{
-				<li>
-					<a asp-area="" asp-controller="News" asp-action="Index" asp-route-id="@entity.Id">
-						@if (entity.TitleImagePath != default)
+    @if (Model.NewsItems.Any())
+    {
+        <ul class="big-image-list">
+            @foreach (NewsItem entity in Model.NewsItems)
+            {
+                <li>
+                    <a asp-area="" asp-controller="News" asp-action="Index" asp-route-id="@entity.Id">
+                        @if (entity.TitleImagePath != default)
                         {
-							<img src="~/images/uploads/@entity.TitleImagePath" alt="" class="left" />
+                            <img src="~/images/uploads/@entity.TitleImagePath" alt="" class="left" />
                         }
-						<h4>@entity.Title</h4>
-					</a>
-					<p style="text-decoration:underline">@entity.DateAdded.ToString("MMM , dd, yyyy")</p>
-					<p>@entity.Subtitle</p>
-				</li>
-			}
-		</ul>
-	}
+                        <h4>@entity.Title</h4>
+                    </a>
+                    <p style="text-decoration:underline">@entity.DateAdded.ToString("MMM , dd, yyyy")</p>
+                    <p>@entity.Subtitle</p>
+                </li>
+            }
+        </ul>
+        <br />
+        <page-link page-model="Model.PageViewModel" page-action="Index"></page-link>
+    }
 </div>
 
 

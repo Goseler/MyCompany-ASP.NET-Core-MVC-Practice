@@ -1,11 +1,12 @@
 ﻿using MyCompany.Domain.Entities;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace MyCompany.Models
 {
 	public class NewsViewModel
 	{
-		public IQueryable<NewsItem> NewsItems { get; set; }
+		public IEnumerable<NewsItem> NewsItems { get; set; }
 		public TextField TextField { get; set; }
+		public PageViewModel PageViewModel { get; set; }
 	}
 }
