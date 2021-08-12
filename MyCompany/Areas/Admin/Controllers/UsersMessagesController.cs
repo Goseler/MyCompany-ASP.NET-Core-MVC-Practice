@@ -23,7 +23,7 @@ namespace MyCompany.Areas.Admin.Controllers
 		public IActionResult Index(Guid id)
 		{
 			TechMessage techMessage = dataManager.TechMessages.GetTechMessageById(id);
-			MailRequest entity = new MailRequest() { Subject = techMessage.Title, ToEmail = techMessage.Email, UserBody = techMessage.Text, DateSent = techMessage.DateSent };
+			MailRequest entity = new MailRequest() { Id = techMessage.Id, Subject = techMessage.Title, ToEmail = techMessage.Email, UserBody = techMessage.Text, DateSent = techMessage.DateSent };
 
 			if (entity == null)
 			{
@@ -39,6 +39,7 @@ namespace MyCompany.Areas.Admin.Controllers
 			if (ModelState.IsValid)
 			{
 				await mailService.SendEmailAsync(request);
+				dataManager.TechMessages.DeleteTechMessage(request.Id);
 				return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
 			}
 

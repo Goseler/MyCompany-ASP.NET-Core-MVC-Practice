@@ -5,6 +5,9 @@ namespace MyCompany.Models
 {
 	public class MailRequest
 	{
+		[Display(Name = "ID сообщения")]
+		public Guid Id { get; set; }
+
 		[Display(Name = "Email пользователя")]
 		[DataType(DataType.EmailAddress)]
 		public string ToEmail { get; set; }

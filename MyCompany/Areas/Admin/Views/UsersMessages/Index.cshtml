@@ -10,7 +10,12 @@
     <h2>@strSubject</h2>
     <div>
         <form asp-area="Admin" asp-controller="UsersMessages" asp-action="Index" method="post" enctype="multipart/form-data">
+            <div class="div-box">
+                <input asp-for="Id" type="hidden" />
+            </div>
+
             <div asp-validation-summary="All"></div>
+
             <div class="div-box">
                 <label asp-for="Subject"></label>
                 <input asp-for="Subject" readonly />
@@ -19,12 +24,11 @@
             <div class="div-box">
                 <label asp-for="DateSent"></label>
                 <input type="text" asp-for="DateSent" readonly />
-                
             </div>
 
             <div class="div-box">
                 <label asp-for="ToEmail"></label>
-                <input asp-for="ToEmail" readonly/>
+                <input asp-for="ToEmail" readonly />
             </div>
 
             <div class="div-box">
