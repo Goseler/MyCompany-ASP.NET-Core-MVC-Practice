@@ -1304,3 +1304,26 @@ ul.link-list li {
 a:active,
 a:hover {
   outline: 0; }
+
+.scroll-sidebar {
+    height: auto;
+    max-height: 1500px;
+    overflow-y: scroll;
+}
+
+    .scroll-sidebar::-webkit-scrollbar-track {
+        border: 1px solid black;
+        border-radius: 5px;
+        background-color: #F5F5F5;
+    }
+
+    .scroll-sidebar::-webkit-scrollbar {
+        width: 8px;
+        border-radius: 5px;
+        background-color: #F5F5F5;
+    }
+
+    .scroll-sidebar::-webkit-scrollbar-thumb {
+        background-color: #077d9b;
+        border-radius: 5px;
+    }
