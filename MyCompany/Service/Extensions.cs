@@ -36,8 +36,6 @@ namespace MyCompany.Service
 					if (file.Exists)
 						file.Delete();
 				}
-				else
-					throw new System.ArgumentNullException("", "Файл не существует");
 			}
 		}
 
