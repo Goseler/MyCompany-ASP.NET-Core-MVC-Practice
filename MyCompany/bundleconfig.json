@@ -7,7 +7,6 @@
       "wwwroot/js/browser.min.js",
       "wwwroot/js/breakpoints.min.js",
       "wwwroot/js/util.js",
-      "wwwroot/js/ckeditor/build/ckeditor.js",
       "wwwroot/js/main.js"
     ]
   }
