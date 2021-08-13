@@ -7,9 +7,9 @@
 <div>
     <h1>@strTitle</h1>
 
-    <div>
+    <div onload="loadSelect">
         <label>Выберите страницу для редактирования: </label>
-        <select id="changeStatus" name="changeStatus" onClick="func()" >
+        <select id="changeStatus" name="changeStatus" onchange="selectClick">
             <option value="MainPages">Страницы сайта</option>
             <option value="Services">Наши услуги</option>
             <option value="News">Новости</option>
@@ -25,32 +25,43 @@
             </form>
         </div>
     </div>
-    </div>
+</div>
 
 
 <script>
     function AjaxLoad() {
         $.ajax({
-            url: '@Url.Action("Index", "Home")',
+            url: '@Url.Action("Index", "Home", new { Area = "Admin" })',
             data: { Page: $('select#changeStatus').val() },
             type: 'POST',
             success: function (data) {
-                $("#results").html(data);
+                $("div#results").html(data);
             }
         });
     }
 
+    //function selectClick() {
+    //    let activeOption = document.querySelector('select#changeStatus');
+    //    sessionStorage.setItem('ActiveOption', activeOption.value);
+    //}
+
+    //function loadSelect() {
+    //    let activeOption = document.querySelector('select#changeStatus');
+    //    activeOption.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
+    //    AjaxLoad.call();
+    //}
+
+    let activeOption = document.querySelector('select#changeStatus');
     $('select#changeStatus').change(function () {
         AjaxLoad.call();
     });
-
-    let temp = document.querySelector('#changeStatus');
     window.onload = () => {
-        temp.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
-        AjaxLoad.call();
+        activeOption.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
+    AjaxLoad.call();
     };
-    temp.onclick = () => {
-        sessionStorage.setItem('ActiveOption', temp.value);
+    activeOption.onclick = () => {
+        sessionStorage.setItem('ActiveOption', activeOption.value);
     };
 </script>
+
 

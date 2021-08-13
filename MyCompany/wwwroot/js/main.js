@@ -49,3 +49,85 @@
 		});
 
 })(jQuery);
+
+const watchdog = new CKSource.EditorWatchdog();
+
+window.watchdog = watchdog;
+
+watchdog.setCreator((element, config) => {
+    return CKSource.Editor
+        .create(element, config)
+        .then(editor => {
+
+
+
+
+            return editor;
+        })
+});
+
+watchdog.setDestructor(editor => {
+
+
+
+    return editor.destroy();
+});
+
+watchdog.on('error', handleError);
+
+watchdog
+    .create(document.querySelector('#editor'), {
+
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'fontSize',
+                'bold',
+                'italic',
+                'underline',
+                'link',
+                'fontFamily',
+                'fontBackgroundColor',
+                'fontColor',
+                '|',
+                'findAndReplace',
+                'outdent',
+                'indent',
+                'alignment',
+                'bulletedList',
+                'numberedList',
+                '|',
+                /*'highlight',*/
+                'horizontalLine',
+                /*'blockQuote',*/
+                'insertTable',
+                /*'mediaEmbed',*/
+                'specialCharacters',
+                'undo',
+                'redo'
+            ]
+        },
+        language: 'ru',
+        table: {
+            contentToolbar: [
+                'tableColumn',
+                'tableRow',
+                'mergeTableCells',
+                'tableCellProperties',
+                'tableProperties'
+            ]
+        },
+        licenseKey: '',
+
+
+
+    })
+    .catch(handleError);
+
+function handleError(error) {
+    console.error('Oops, something went wrong!');
+    console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+    console.warn('Build id: wvlz1qvwy9e3-mtx0289es78g');
+    console.error(error);
+}

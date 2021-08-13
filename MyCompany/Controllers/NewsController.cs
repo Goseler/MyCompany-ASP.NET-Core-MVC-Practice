@@ -33,7 +33,7 @@ namespace MyCompany.Controllers
 			IQueryable<NewsItem> newsItems = dataManager.NewsItems.GetNewsItems();
 			TextField textField = dataManager.TextFields.GetTextFieldByCodeWord("PageNews"); ;
 
-			int pageSize = 7;
+			int pageSize = 4;
 			var count = await newsItems.CountAsync();
 			var items = await newsItems.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 			PageViewModel pageViewModel = new(count, page, pageSize);
