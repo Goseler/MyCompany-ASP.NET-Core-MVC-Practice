@@ -3,20 +3,21 @@
     ViewBag.Title = strTitle;
 }
 
+
 <div>
     <h1>@strTitle</h1>
 
     <div>
         <label>Выберите страницу для редактирования: </label>
-        <select id="changeStatus" name="changeStatus" onchange="getActiveVal()" >
-            <option value="Main">Страницы сайта</option>
+        <select id="changeStatus" name="changeStatus" onClick="func()" >
+            <option value="MainPages">Страницы сайта</option>
             <option value="Services">Наши услуги</option>
             <option value="News">Новости</option>
             <option value="NewsReviews">Рецензии новостей</option>
             <option value="UsersMessages">Сообщения от пользователей</option>
         </select>
 
-        <div id="results">@{await Html.RenderPartialAsync("MainPagesPartial");}</div>
+        <div id="results"></div>
 
         <div class="div-box">
             <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
@@ -26,8 +27,9 @@
     </div>
     </div>
 
+
 <script>
-    $('select#changeStatus').change(function () {
+    function AjaxLoad() {
         $.ajax({
             url: '@Url.Action("Index", "Home")',
             data: { Page: $('select#changeStatus').val() },
@@ -36,42 +38,19 @@
                 $("#results").html(data);
             }
         });
-    });
-
-    //on click select get val
-    //handle on select_click save in local storage value
-    //then default select from local storage or null - Main
-    //val activeNow;
-    //....
-    //if (activeNow === null) {
-    //    activeNow = 'Main';
-    //}
-    //localStorage.setItem('ActiveOption', activeNow);
-    //val act = localStorage.getItem('ActiveOption');
-
-    $(function () {
-        var defaultOption = window.localStorage.getItem('ActiveOption');
-        console.log(defaultOption);
-        if (defaultOption == null) {
-            defaultOption = 'Main';
-        }
-        $("#changeStatus").val(defaultOption);
-    });
-
-    function getActiveVal() {
-        var activeNow = document.getElementById('#changeStatus').value;
-        console.log('value: ' + activeNow.toString() );
-        window.localStorage.setItem('ActiveOption', activeNow);
     }
 
-    $('#changeStatus').change(function() {
-        var activeNow = document.getElementById('#changeStatus').val();
-        if (activeNow == null) {
-            activeNow = "Main";
-        }
-        console.log(activeNow + " value");
+    $('select#changeStatus').change(function () {
+        AjaxLoad.call();
     });
 
-
+    let temp = document.querySelector('#changeStatus');
+    window.onload = () => {
+        temp.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
+        AjaxLoad.call();
+    };
+    temp.onclick = () => {
+        sessionStorage.setItem('ActiveOption', temp.value);
+    };
 </script>
 

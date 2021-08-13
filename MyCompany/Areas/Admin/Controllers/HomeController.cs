@@ -19,7 +19,7 @@ namespace MyCompany.Areas.Admin.Controllers
 			return Page switch
 			{
 				AjaxPage.Services => PartialView("ServicesPartial", dataManager.ServiceItems.GetServiceItems()),
-				AjaxPage.Main => PartialView("MainPagesPartial"),
+				AjaxPage.MainPages => PartialView("MainPagesPartial"),
 				AjaxPage.News => PartialView("NewsPartial", dataManager.NewsItems.GetNewsItems()),
 				AjaxPage.UsersMessages => PartialView("UsersMessagesPartial", dataManager.TechMessages.GetTechMessages()),
 				AjaxPage.NewsReviews => PartialView("NewsReviewsPartial", dataManager.NewsMessages.GetNewsMessages()),

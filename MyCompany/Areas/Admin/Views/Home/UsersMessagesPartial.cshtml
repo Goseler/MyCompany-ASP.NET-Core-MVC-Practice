@@ -6,21 +6,21 @@
     <div>
         @foreach (TechMessage entity in Model)
         {
-        <div>
-            <a style="text-decoration:none; font-weight:bolder;" asp-area="" asp-controller="UsersMessages" asp-action="Index" asp-route-id="@entity.Id">
-                @($"{entity.Title}")
-            </a>
-            <br />
-            <a class="div-box" sp-area="" asp-controller="UsersMessages" asp-action="Index" asp-route-id="@entity.Id">Открыть</a>
+            <div>
+                <a style="text-decoration:none; font-weight:bolder;" asp-area="" asp-controller="UsersMessages" asp-action="Index" asp-route-id="@entity.Id">
+                    @($"{entity.Title}")
+                </a>
+                <br />
+                <a class="div-box" sp-area="" asp-controller="UsersMessages" asp-action="Index" asp-route-id="@entity.Id">Открыть</a>
 
-            <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="UsersMessages" asp-action="Delete" method="post">
-                <input type="hidden" name="id" value="@entity.Id" />
-                <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">Удалить</a>
-            </form>
+                <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="UsersMessages" asp-action="Delete" method="post">
+                    <input type="hidden" name="id" value="@entity.Id" />
+                    <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">Удалить</a>
+                </form>
 
-            <br />
-            <br />
-        </div>
+                <br />
+                <br />
+            </div>
         }
     </div>
 }

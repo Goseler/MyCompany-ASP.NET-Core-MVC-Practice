@@ -3,7 +3,7 @@
 	public enum AjaxPage
 	{
 		Services,
-		Main,
+		MainPages,
 		News,
 		UsersMessages,
 		NewsReviews
