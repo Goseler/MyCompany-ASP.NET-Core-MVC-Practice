@@ -1200,8 +1200,7 @@ ul.link-list li {
 .img-block {
   display: block;
   max-width: 100%;
-  margin: 0 auto; 
-}
+  margin: 0 auto; }
 
 #nav a {
   text-transform: initial; }
@@ -1308,7 +1307,7 @@ a:hover {
 
 .scroll-sidebar {
     height: auto;
-    max-height: 500px;
+    max-height: 1500px;
     overflow-y: scroll;
 }
 
@@ -1328,9 +1327,3 @@ a:hover {
         background-color: #077d9b;
         border-radius: 5px;
     }
-
-body{
-    img{
-        border-radius: 4%;
-    }
-}

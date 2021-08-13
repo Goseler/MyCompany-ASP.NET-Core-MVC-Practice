@@ -10,14 +10,6 @@
       "wwwroot/js/main.js"
       //"wwwroot/js/bootstrap.min.js"
     ]
-  },
-  {
-    "outputFileName": "wwwroot/css/main.css",
-    "inputFiles": [
-      "wwwroot/css/sass.css"
-      //"wwwroot/css/bootstrap.min.css",
-      //"wwwroot/css/bootstrap-theme.min.css"
-    ]
   }
 ]
 
