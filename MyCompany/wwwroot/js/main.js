@@ -50,84 +50,110 @@
 
 })(jQuery);
 
-const watchdog = new CKSource.EditorWatchdog();
+//const watchdog = new CKSource.EditorWatchdog();
 
-window.watchdog = watchdog;
+//window.watchdog = watchdog;
 
-watchdog.setCreator((element, config) => {
-    return CKSource.Editor
-        .create(element, config)
-        .then(editor => {
-
-
+//watchdog.setCreator((element, config) => {
+//    return CKSource.Editor
+//        .create(element, config)
+//        .then(editor => {
 
 
-            return editor;
-        })
+
+
+//            return editor;
+//        })
+//});
+
+//watchdog.setDestructor(editor => {
+
+
+
+//    return editor.destroy();
+//});
+
+//watchdog.on('error', handleError);
+
+//watchdog
+//    .create(document.querySelector('#editor'), {
+
+//        toolbar: {
+//            items: [
+//                'heading',
+//                '|',
+//                'fontSize',
+//                'bold',
+//                'italic',
+//                'underline',
+//                'link',
+//                'fontFamily',
+//                'fontBackgroundColor',
+//                'fontColor',
+//                '|',
+//                'findAndReplace',
+//                'outdent',
+//                'indent',
+//                'alignment',
+//                'bulletedList',
+//                'numberedList',
+//                '|',
+//                /*'highlight',*/
+//                'horizontalLine',
+//                /*'blockQuote',*/
+//                'insertTable',
+//                /*'mediaEmbed',*/
+//                'specialCharacters',
+//                'undo',
+//                'redo'
+//            ]
+//        },
+//        language: 'ru',
+//        table: {
+//            contentToolbar: [
+//                'tableColumn',
+//                'tableRow',
+//                'mergeTableCells',
+//                'tableCellProperties',
+//                'tableProperties'
+//            ]
+//        },
+//        licenseKey: '',
+
+
+
+//    })
+//    .catch(handleError);
+
+//function handleError(error) {
+//    console.error('Oops, something went wrong!');
+//    console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+//    console.warn('Build id: wvlz1qvwy9e3-mtx0289es78g');
+//    console.error(error);
+//}
+
+
+// --------------------------------------------------------
+function AjaxLoad() {
+    $.ajax({
+        url: '/Admin',
+        data: { Page: $('select#adminSelect').val() },
+        type: 'POST',
+        success: function (data) {
+            $("div#results").html(data);
+        }
+    });
+}
+
+let activeOption = document.querySelector('select#adminSelect');
+$('select#adminSelect').change(function () {
+    sessionStorage.setItem('ActiveOption', activeOption.value);
+    AjaxLoad.call();
 });
 
-watchdog.setDestructor(editor => {
-
-
-
-    return editor.destroy();
-});
-
-watchdog.on('error', handleError);
-
-watchdog
-    .create(document.querySelector('#editor'), {
-
-        toolbar: {
-            items: [
-                'heading',
-                '|',
-                'fontSize',
-                'bold',
-                'italic',
-                'underline',
-                'link',
-                'fontFamily',
-                'fontBackgroundColor',
-                'fontColor',
-                '|',
-                'findAndReplace',
-                'outdent',
-                'indent',
-                'alignment',
-                'bulletedList',
-                'numberedList',
-                '|',
-                /*'highlight',*/
-                'horizontalLine',
-                /*'blockQuote',*/
-                'insertTable',
-                /*'mediaEmbed',*/
-                'specialCharacters',
-                'undo',
-                'redo'
-            ]
-        },
-        language: 'ru',
-        table: {
-            contentToolbar: [
-                'tableColumn',
-                'tableRow',
-                'mergeTableCells',
-                'tableCellProperties',
-                'tableProperties'
-            ]
-        },
-        licenseKey: '',
-
-
-
-    })
-    .catch(handleError);
-
-function handleError(error) {
-    console.error('Oops, something went wrong!');
-    console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-    console.warn('Build id: wvlz1qvwy9e3-mtx0289es78g');
-    console.error(error);
+if (window.location.pathname.toLowerCase() == ('/admin') || window.location.pathname.toLowerCase() == ('/admin/home') || window.location.pathname.toLowerCase() == ('/admin/home/index')) {
+    window.onload = () => {
+        activeOption.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
+        AjaxLoad.call();
+	};
 }

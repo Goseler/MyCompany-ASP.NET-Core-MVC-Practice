@@ -9,7 +9,7 @@
 
     <div>
         <label>Выберите страницу для редактирования: </label>
-        <select id="changeStatus" name="changeStatus">
+        <select id="adminSelect" name="adminSelect">
             <option value="MainPages">Страницы сайта</option>
             <option value="Services">Наши услуги</option>
             <option value="News">Новости</option>
@@ -29,10 +29,10 @@
 
 
 <script>
-    function AjaxLoad() {
+    @*function AjaxLoad() {
         $.ajax({
             url: '@Url.Action("Index", "Home", new { Area = "Admin" })',
-            data: { Page: $('select#changeStatus').val() },
+            data: { Page: $('select#adminSelect').val() },
             type: 'POST',
             success: function (data) {
                 $("div#results").html(data);
@@ -40,28 +40,18 @@
         });
     }
 
-    //function selectClick() {
-    //    let activeOption = document.querySelector('select#changeStatus');
-    //    sessionStorage.setItem('ActiveOption', activeOption.value);
-    //}
-
-    //function loadSelect() {
-    //    let activeOption = document.querySelector('select#changeStatus');
-    //    activeOption.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
-    //    AjaxLoad.call();
-    //}
-
-    let activeOption = document.querySelector('select#changeStatus');
-    $('select#changeStatus').change(function () {
+    let activeOption = document.querySelector('select#adminSelect');
+    $('select#adminSelect').change(function () {
+        sessionStorage.setItem('ActiveOption', activeOption.value);
         AjaxLoad.call();
     });
+
+    if (window.location.pathname.indexOf('/Admin') == 0 || window.location.pathname.indexOf('/admin') == 0)
     window.onload = () => {
         activeOption.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
-    AjaxLoad.call();
-    };
-    activeOption.onclick = () => {
-        sessionStorage.setItem('ActiveOption', activeOption.value);
-    };
+        AjaxLoad.call();
+    };*@
+
 </script>
 
 
