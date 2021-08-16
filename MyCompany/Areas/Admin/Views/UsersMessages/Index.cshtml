@@ -33,12 +33,14 @@
 
             <div class="div-box">
                 <label asp-for="UserBody"></label>
-                <textarea asp-for="UserBody" readonly></textarea>
+                <textarea asp-for="UserBody" class="editor" readonly ></textarea>
+
+                <div asp-for="UserBody"></div>
             </div>
 
             <div class="div-box">
                 <label asp-for="ResponseBody"></label>
-                <textarea asp-for="ResponseBody" id="editor"></textarea>
+                <textarea asp-for="ResponseBody" class="editor"></textarea>
                 <span asp-validation-for="ResponseBody"></span>
             </div>
             <input type="submit" value="Отправить" />
@@ -47,86 +49,130 @@
 </div>
 
 <script>
-    const watchdog = new CKSource.EditorWatchdog();
+    var allEditors = document.querySelectorAll('.editor');
+    for (var i = 0; i < allEditors.length; ++i) {
+        ClassicEditor
+            .create(allEditors[i], {
 
-    window.watchdog = watchdog;
+                toolbar: {
+                    items: [
+                        'undo',
+                        'redo',
+                        '|',
+                        'heading',
+                        'fontFamily',
+                        'fontSize',
+                        'bold',
+                        'italic',
+                        'underline',
+                        'subscript',
+                        'superscript',
+                        'link',
+                        'fontBackgroundColor',
+                        'fontColor',
+                        'removeFormat',
+                        '|',
+                        'insertTable',
+                        'horizontalLine',
+                        'bulletedList',
+                        'numberedList',
+                        'outdent',
+                        'indent',
+                        '|',
+                        'findAndReplace',
+                        'specialCharacters',
+                        'strikethrough'
+                    ]
+                },
+                language: 'ru',
+                table: {
+                    contentToolbar: [
+                        'tableColumn',
+                        'tableRow',
+                        'mergeTableCells',
+                        'tableCellProperties',
+                        'tableProperties'
+                    ]
+                },
+                licenseKey: '',
 
-    watchdog.setCreator((element, config) => {
-        return CKSource.Editor
-            .create(element, config)
-            .then(editor => {
 
 
-
-
-                return editor;
             })
-    });
-
-    watchdog.setDestructor(editor => {
-
-
-
-        return editor.destroy();
-    });
-
-    watchdog.on('error', handleError);
-
-    watchdog
-        .create(document.querySelector('#editor'), {
-
-            toolbar: {
-                items: [
-                    'heading',
-                    '|',
-                    'fontSize',
-                    'bold',
-                    'italic',
-                    'underline',
-                    'link',
-                    'fontFamily',
-                    'fontBackgroundColor',
-                    'fontColor',
-                    '|',
-                    'findAndReplace',
-                    'outdent',
-                    'indent',
-                    'alignment',
-                    'bulletedList',
-                    'numberedList',
-                    '|',
-                    /*'highlight',*/
-                    'horizontalLine',
-                    /*'blockQuote',*/
-                    'insertTable',
-                    /*'mediaEmbed',*/
-                    'specialCharacters',
-                    'undo',
-                    'redo'
-                ]
-            },
-            language: 'ru',
-            table: {
-                contentToolbar: [
-                    'tableColumn',
-                    'tableRow',
-                    'mergeTableCells',
-                    'tableCellProperties',
-                    'tableProperties'
-                ]
-            },
-            licenseKey: '',
+            .then(editor => {
+                window.editor = editor;
 
 
 
-        })
-        .catch(handleError);
 
-    function handleError(error) {
-        console.error('Oops, something went wrong!');
-        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-        console.warn('Build id: wvlz1qvwy9e3-mtx0289es78g');
-        console.error(error);
+            })
+            .catch(error => {
+                console.error('Oops, something went wrong!');
+                console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                console.warn('Build id: 2lzw6f1h9orn-o58qrh9mx679');
+                console.error(error);
+            });
     }
+    //ClassicEditor
+    //    .create(document.querySelector('.editor'), {
+
+    //        toolbar: {
+    //            items: [
+    //                'undo',
+    //                'redo',
+    //                '|',
+    //                'heading',
+    //                'fontFamily',
+    //                'fontSize',
+    //                'bold',
+    //                'italic',
+    //                'underline',
+    //                'subscript',
+    //                'superscript',
+    //                'link',
+    //                'fontBackgroundColor',
+    //                'fontColor',
+    //                'removeFormat',
+    //                '|',
+    //                'insertTable',
+    //                'horizontalLine',
+    //                'bulletedList',
+    //                'numberedList',
+    //                'outdent',
+    //                'indent',
+    //                '|',
+    //                'findAndReplace',
+    //                'specialCharacters',
+    //                'strikethrough'
+    //            ]
+    //        },
+    //        language: 'ru',
+    //        table: {
+    //            contentToolbar: [
+    //                'tableColumn',
+    //                'tableRow',
+    //                'mergeTableCells',
+    //                'tableCellProperties',
+    //                'tableProperties'
+    //            ]
+    //        },
+    //        licenseKey: '',
+
+
+
+    //    })
+    //    .then(editor => {
+    //        window.editor = editor;
+
+
+
+
+    //    })
+    //    .catch(error => {
+    //        console.error('Oops, something went wrong!');
+    //        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+    //        console.warn('Build id: 2lzw6f1h9orn-o58qrh9mx679');
+    //        console.error(error);
+    //    });
 
 </script>

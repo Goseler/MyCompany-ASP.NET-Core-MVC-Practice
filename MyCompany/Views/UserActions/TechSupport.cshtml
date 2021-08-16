@@ -26,7 +26,7 @@
             </div>
             <div class="div-box">
                 <label asp-for="Text"></label>
-                <textarea asp-for="Text" id="editor"></textarea>
+                <textarea asp-for="Text" class="editor"></textarea>
                 <span asp-validation-for="Text"></span>
             </div>
             <input type="submit" value="Отправить" />
@@ -35,62 +35,37 @@
 </div>
 
 <script>
-    const watchdog = new CKSource.EditorWatchdog();
-
-    window.watchdog = watchdog;
-
-    watchdog.setCreator((element, config) => {
-        return CKSource.Editor
-            .create(element, config)
-            .then(editor => {
-
-
-
-
-                return editor;
-            })
-    });
-
-    watchdog.setDestructor(editor => {
-
-
-
-        return editor.destroy();
-    });
-
-    watchdog.on('error', handleError);
-
-    watchdog
-        .create(document.querySelector('#editor'), {
+    ClassicEditor
+        .create(document.querySelector('.editor'), {
 
             toolbar: {
                 items: [
-                    'heading',
+                    'undo',
+                    'redo',
                     '|',
+                    'heading',
+                    'fontFamily',
                     'fontSize',
                     'bold',
                     'italic',
                     'underline',
+                    'subscript',
+                    'superscript',
                     'link',
-                    'fontFamily',
                     'fontBackgroundColor',
                     'fontColor',
+                    'removeFormat',
                     '|',
-                    'findAndReplace',
-                    'outdent',
-                    'indent',
-                    'alignment',
+                    'insertTable',
+                    'horizontalLine',
                     'bulletedList',
                     'numberedList',
+                    'outdent',
+                    'indent',
                     '|',
-                    /*'highlight',*/
-                    'horizontalLine',
-                    /*'blockQuote',*/
-                    'insertTable',
-                    /*'mediaEmbed',*/
+                    'findAndReplace',
                     'specialCharacters',
-                    'undo',
-                    'redo'
+                    'strikethrough'
                 ]
             },
             language: 'ru',
@@ -108,13 +83,18 @@
 
 
         })
-        .catch(handleError);
+        .then(editor => {
+            window.editor = editor;
 
-    function handleError(error) {
-        console.error('Oops, something went wrong!');
-        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-        console.warn('Build id: wvlz1qvwy9e3-mtx0289es78g');
-        console.error(error);
-    }
+
+
+
+        })
+        .catch(error => {
+            console.error('Oops, something went wrong!');
+            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+            console.warn('Build id: 2lzw6f1h9orn-o58qrh9mx679');
+            console.error(error);
+        });
 
 </script>

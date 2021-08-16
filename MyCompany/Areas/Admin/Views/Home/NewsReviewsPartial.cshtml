@@ -7,7 +7,7 @@
         @foreach (NewsMessage entity in Model)
         {
             <div>
-                <a asp-area="Admin" asp-controller="NewsReviews" asp-action="Review" asp-route-id="@entity.Id">
+                <a style="text-decoration:none; font-weight:bolder;" asp-area="Admin" asp-controller="NewsReviews" asp-action="Review" asp-route-id="@entity.Id">
                     @($"{entity.Title}")
                 </a>
                 <br />
