@@ -69,7 +69,12 @@ $('select#adminSelect').change(function () {
     AjaxLoad.call();
 });
 
-if (window.location.pathname.toLowerCase() == ('/admin') || window.location.pathname.toLowerCase() == ('/admin/home') || window.location.pathname.toLowerCase() == ('/admin/home/index')) {
+if (window.location.pathname.toLowerCase() == ('/admin') ||
+	window.location.pathname.toLowerCase() == ('/admin/home') ||
+	window.location.pathname.toLowerCase() == ('/admin/home/index') ||
+	window.location.pathname.toLowerCase() == ('/admin/') ||
+	window.location.pathname.toLowerCase() == ('/admin/home/') ||
+	window.location.pathname.toLowerCase() == ('/admin/home/index/')) {
     window.onload = () => {
         activeOption.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
         AjaxLoad.call();
