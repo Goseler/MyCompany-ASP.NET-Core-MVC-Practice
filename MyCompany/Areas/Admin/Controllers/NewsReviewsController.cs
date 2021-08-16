@@ -42,16 +42,8 @@ namespace MyCompany.Areas.Admin.Controllers
 			{
 				if (ModelState.IsValid)
 				{
-					if (titleImageFile != null)
-					{
-						FileManager.Delete(newsMessage.TitleImagePath, "images/uploads/", webHostEnvironment);
+					FileManager.SaveImage(titleImageFile, newsMessage.TitleImagePath, webHostEnvironment);
 
-						newsMessage.TitleImagePath = Guid.NewGuid().ToString("N") + titleImageFile.FileName;
-						using var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", newsMessage.TitleImagePath), FileMode.Create);
-						titleImageFile.CopyTo(stream);
-					}
-
-					// Add News to DB
 					NewsItem newsItem = newsMessage.ConvertToNews();
 
 					try
@@ -72,7 +64,6 @@ namespace MyCompany.Areas.Admin.Controllers
 					return View(newsMessage);
 			}
 
-			// Send Email
 			MailRequest mailRequest = new()
 			{
 				Subject = new string("Рецензия на новсть: " + newsMessage.Title),

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using MyCompany.Domain.Entities;
+using System;
 using System.IO;
 
 namespace MyCompany.Service
@@ -35,6 +37,18 @@ namespace MyCompany.Service
 					FileInfo file = new(Path.Combine(webHostEnvironment.WebRootPath, path, name));
 					if (file.Exists)
 						file.Delete();
+				}
+			}
+
+			public static void SaveImage(IFormFile formFile, string titleImagePath, IWebHostEnvironment webHostEnvironment)
+			{
+				if (formFile != null)
+				{
+					Delete(titleImagePath, "images/uploads/", webHostEnvironment);
+
+					titleImagePath = Guid.NewGuid().ToString("N") + formFile.FileName;
+					using var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/uploads/", titleImagePath), FileMode.Create);
+					formFile.CopyTo(stream);
 				}
 			}
 		}
