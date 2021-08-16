@@ -3,10 +3,12 @@
     ViewBag.Title = Model.MetaTitle;
     ViewBag.Description = Model.MetaDescription;
     ViewBag.KeyWords = Model.MetaKeywords;
+
+    string strTitle = "Рецензия на новость";
+    ViewBag.Title = strTitle;
 }
 
-<script src="~/js/ckeditor/build/ckeditor.js"></script>
-
+<h2>@strTitle</h2>
 <form asp-area="Admin" asp-controller="NewsReviews" asp-action="Review" method="post" enctype="multipart/form-data">
     <div>
         <input type="hidden" asp-for="Id" />
@@ -25,12 +27,12 @@
         </div>
         <div class="div-box">
             <label asp-for="Subtitle"></label>
-            <input asp-for="Subtitle" />
+            <textarea asp-for="Subtitle" class="editor"></textarea>
             <span asp-validation-for="Subtitle"></span>
         </div>
         <div class="div-box">
             <label asp-for="Text"></label>
-            <textarea asp-for="Text" id="editor"></textarea>
+            <textarea asp-for="Text" class="editor"></textarea>
             <span asp-validation-for="Text"></span>
         </div>
         <div class="div-box div-image">
@@ -77,68 +79,71 @@
     </div>
 </form>
 
+<script src="~/js/ckeditor/build/ckeditor.js"></script>
 <script>
-    ClassicEditor
-        .create(document.querySelector('.editor'), {
+    var allEditors = document.querySelectorAll('.editor');
+    for (var i = 0; i < allEditors.length; ++i) {
+        ClassicEditor
+            .create(allEditors[i], {
 
-            toolbar: {
-                items: [
-                    'undo',
-                    'redo',
-                    '|',
-                    'heading',
-                    'fontFamily',
-                    'fontSize',
-                    'bold',
-                    'italic',
-                    'underline',
-                    'subscript',
-                    'superscript',
-                    'strikethrough',
-                    'link',
-                    'fontBackgroundColor',
-                    'fontColor',
-                    'removeFormat',
-                    '|',
-                    'insertTable',
-                    'horizontalLine',
-                    'bulletedList',
-                    'numberedList',
-                    'outdent',
-                    'indent',
-                    'alignment',
-                    '|',
-                    'findAndReplace',
-                    'specialCharacters'
-                ]
-            },
-            language: 'ru',
-            table: {
-                contentToolbar: [
-                    'tableColumn',
-                    'tableRow',
-                    'mergeTableCells',
-                    'tableCellProperties',
-                    'tableProperties'
-                ]
-            },
-            licenseKey: '',
-
-
-
-        })
-        .then(editor => {
-            window.editor = editor;
+                toolbar: {
+                    items: [
+                        'undo',
+                        'redo',
+                        '|',
+                        'heading',
+                        'fontFamily',
+                        'fontSize',
+                        'bold',
+                        'italic',
+                        'underline',
+                        'subscript',
+                        'superscript',
+                        'strikethrough',
+                        'link',
+                        'fontBackgroundColor',
+                        'fontColor',
+                        'removeFormat',
+                        '|',
+                        'insertTable',
+                        'horizontalLine',
+                        'bulletedList',
+                        'numberedList',
+                        'outdent',
+                        'indent',
+                        'alignment',
+                        '|',
+                        'findAndReplace',
+                        'specialCharacters'
+                    ]
+                },
+                language: 'ru',
+                table: {
+                    contentToolbar: [
+                        'tableColumn',
+                        'tableRow',
+                        'mergeTableCells',
+                        'tableCellProperties',
+                        'tableProperties'
+                    ]
+                },
+                licenseKey: '',
 
 
 
+            })
+            .then(editor => {
+                window.editor = editor;
 
-        })
-        .catch(error => {
-            console.error('Oops, something went wrong!');
-            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-            console.warn('Build id: xnelco8s2gr-w9ij9xrvtm7e');
-            console.error(error);
-        });
 
+
+
+            })
+            .catch(error => {
+                console.error('Oops, something went wrong!');
+                console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                console.warn('Build id: xnelco8s2gr-w9ij9xrvtm7e');
+                console.error(error);
+            });
+    }
 </script>

@@ -31,13 +31,14 @@ namespace MyCompany.Service
 				message.To.Add(mailRequest.ToEmail); //адресат сообщения
 				message.Subject = mailRequest.Subject; //тема сообщения
 				message.Body = new string("<div>" + mailRequest.ResponseBody + "<br/>" + mailRequest.DateSent.ToString("MMM , dd, yyyy") + "<br/><br/><br/>" + "</div>" + mailRequest.UserBody); //тело сообщения
-				message.Attachments.Add(new Attachment(mailRequest.TitleImagePath)); //добавить вложение к письму при необходимости
+				if(mailRequest.TitleImagePath != null)
+					message.Attachments.Add(new Attachment(mailRequest.TitleImagePath)); //добавить вложение к письму при необходимости
 																					 //var builder = new BodyBuilder();
 
 				using SmtpClient client = new(_mailSettings.Host); //используем сервера Advantiss
 				client.Credentials = new NetworkCredential(_mailSettings.Mail, _mailSettings.Password); //логин-пароль от аккаунта
 				client.Port = _mailSettings.Port; //порт 587 либо 465
-												  //client.EnableSsl = true; //SSL обязательно
+				//client.EnableSsl = true; //SSL обязательно
 
 				await client.SendMailAsync(message);
 				_logger.LogInformation("Сообщение отправлено успешно!");
