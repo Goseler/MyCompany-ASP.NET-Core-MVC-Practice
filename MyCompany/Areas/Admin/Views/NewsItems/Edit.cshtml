@@ -4,7 +4,6 @@
     ViewBag.Title = strTitle;
 }
 
-<script src="~/js/ckeditor/build/ckeditor.js"></script>
 
 <div>
     <h2>@strTitle</h2>
@@ -60,7 +59,7 @@
     </div>
 </div>
 
-
+<script src="~/js/ckeditor/build/ckeditor.js"></script>
 <script>
     ClassicEditor
         .create(document.querySelector('.editor'), {
@@ -78,6 +77,7 @@
                     'underline',
                     'subscript',
                     'superscript',
+                    'strikethrough',
                     'link',
                     'fontBackgroundColor',
                     'fontColor',
@@ -89,10 +89,10 @@
                     'numberedList',
                     'outdent',
                     'indent',
+                    'alignment',
                     '|',
                     'findAndReplace',
-                    'specialCharacters',
-                    'strikethrough'
+                    'specialCharacters'
                 ]
             },
             language: 'ru',
@@ -120,7 +120,7 @@
         .catch(error => {
             console.error('Oops, something went wrong!');
             console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-            console.warn('Build id: 2lzw6f1h9orn-o58qrh9mx679');
+            console.warn('Build id: xnelco8s2gr-w9ij9xrvtm7e');
             console.error(error);
         });
 
