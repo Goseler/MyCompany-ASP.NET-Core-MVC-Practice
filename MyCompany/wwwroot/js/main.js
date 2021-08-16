@@ -50,6 +50,36 @@
 
 })(jQuery);
 
+// --------------------------------------------------------
+
+function AjaxLoad() {
+    $.ajax({
+        url: '/Admin',
+        data: { Page: $('select#adminSelect').val() },
+        type: 'POST',
+        success: function (data) {
+            $("div#results").html(data);
+        }
+    });
+}
+
+let activeOption = document.querySelector('select#adminSelect');
+$('select#adminSelect').change(function () {
+    sessionStorage.setItem('ActiveOption', activeOption.value);
+    AjaxLoad.call();
+});
+
+if (window.location.pathname.toLowerCase() == ('/admin') || window.location.pathname.toLowerCase() == ('/admin/home') || window.location.pathname.toLowerCase() == ('/admin/home/index')) {
+    window.onload = () => {
+        activeOption.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
+        AjaxLoad.call();
+	};
+}
+
+// ------------------------------------------
+// CKEditor
+// ------------------------------------------
+
 //const watchdog = new CKSource.EditorWatchdog();
 
 //window.watchdog = watchdog;
@@ -131,29 +161,3 @@
 //    console.warn('Build id: wvlz1qvwy9e3-mtx0289es78g');
 //    console.error(error);
 //}
-
-
-// --------------------------------------------------------
-function AjaxLoad() {
-    $.ajax({
-        url: '/Admin',
-        data: { Page: $('select#adminSelect').val() },
-        type: 'POST',
-        success: function (data) {
-            $("div#results").html(data);
-        }
-    });
-}
-
-let activeOption = document.querySelector('select#adminSelect');
-$('select#adminSelect').change(function () {
-    sessionStorage.setItem('ActiveOption', activeOption.value);
-    AjaxLoad.call();
-});
-
-if (window.location.pathname.toLowerCase() == ('/admin') || window.location.pathname.toLowerCase() == ('/admin/home') || window.location.pathname.toLowerCase() == ('/admin/home/index')) {
-    window.onload = () => {
-        activeOption.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
-        AjaxLoad.call();
-	};
-}
