@@ -1,0 +1,178 @@
+﻿@model MailRequest
+@{
+    string strSubject = "Ответить на сообщение";
+    ViewBag.Subject = strSubject;
+}
+
+
+<div>
+    <h2>@strSubject</h2>
+    <div>
+        <form asp-area="Admin" asp-controller="UsersMessages" asp-action="Index" method="post" enctype="multipart/form-data">
+            <div class="div-box">
+                <input asp-for="Id" type="hidden" />
+            </div>
+
+            <div asp-validation-summary="All"></div>
+
+            <div class="div-box">
+                <label asp-for="Subject"></label>
+                <input asp-for="Subject" readonly />
+            </div>
+
+            <div class="div-box">
+                <label asp-for="DateSent"></label>
+                <input type="text" asp-for="DateSent" readonly />
+            </div>
+
+            <div class="div-box">
+                <label asp-for="ToEmail"></label>
+                <input asp-for="ToEmail" readonly />
+            </div>
+
+            <div class="div-box">
+                <label asp-for="UserBody"></label>
+                <textarea asp-for="UserBody" class="editor" readonly ></textarea>
+            </div>
+
+            <div class="div-box">
+                <label asp-for="ResponseBody"></label>
+                <textarea asp-for="ResponseBody" class="editor"></textarea>
+                <span asp-validation-for="ResponseBody"></span>
+            </div>
+            <input type="submit" value="Отправить" />
+        </form>
+    </div>
+</div>
+
+
+<script src="~/js/ckeditor/build/ckeditor.js"></script>
+<script>
+    var allEditors = document.querySelectorAll('.editor');
+    for (var i = 0; i < allEditors.length; ++i) {
+        ClassicEditor
+            .create(allEditors[i], {
+
+                toolbar: {
+                    items: [
+                        'undo',
+                        'redo',
+                        '|',
+                        'heading',
+                        'fontFamily',
+                        'fontSize',
+                        'bold',
+                        'italic',
+                        'underline',
+                        'subscript',
+                        'superscript',
+                        'strikethrough',
+                        'link',
+                        'fontBackgroundColor',
+                        'fontColor',
+                        'removeFormat',
+                        '|',
+                        'insertTable',
+                        'horizontalLine',
+                        'bulletedList',
+                        'numberedList',
+                        'outdent',
+                        'indent',
+                        'alignment',
+                        '|',
+                        'findAndReplace',
+                        'specialCharacters'
+                    ]
+                },
+                language: 'ru',
+                table: {
+                    contentToolbar: [
+                        'tableColumn',
+                        'tableRow',
+                        'mergeTableCells',
+                        'tableCellProperties',
+                        'tableProperties'
+                    ]
+                },
+                licenseKey: '',
+
+
+
+            })
+            .then(editor => {
+                window.editor = editor;
+
+
+
+
+            })
+            .catch(error => {
+                console.error('Oops, something went wrong!');
+                console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                console.warn('Build id: xnelco8s2gr-w9ij9xrvtm7e');
+                console.error(error);
+            });
+    }
+    //ClassicEditor
+    //    .create(document.querySelector('.editor'), {
+
+    //        toolbar: {
+    //            items: [
+    //                'undo',
+    //                'redo',
+    //                '|',
+    //                'heading',
+    //                'fontFamily',
+    //                'fontSize',
+    //                'bold',
+    //                'italic',
+    //                'underline',
+    //                'subscript',
+    //                'superscript',
+    //                'link',
+    //                'fontBackgroundColor',
+    //                'fontColor',
+    //                'removeFormat',
+    //                '|',
+    //                'insertTable',
+    //                'horizontalLine',
+    //                'bulletedList',
+    //                'numberedList',
+    //                'outdent',
+    //                'indent',
+    //                '|',
+    //                'findAndReplace',
+    //                'specialCharacters',
+    //                'strikethrough'
+    //            ]
+    //        },
+    //        language: 'ru',
+    //        table: {
+    //            contentToolbar: [
+    //                'tableColumn',
+    //                'tableRow',
+    //                'mergeTableCells',
+    //                'tableCellProperties',
+    //                'tableProperties'
+    //            ]
+    //        },
+    //        licenseKey: '',
+
+
+
+    //    })
+    //    .then(editor => {
+    //        window.editor = editor;
+
+
+
+
+    //    })
+    //    .catch(error => {
+    //        console.error('Oops, something went wrong!');
+    //        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+    //        console.warn('Build id: 2lzw6f1h9orn-o58qrh9mx679');
+    //        console.error(error);
+    //    });
+
+</script>

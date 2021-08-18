@@ -1,0 +1,27 @@
+﻿@model IQueryable<ServiceItem>
+
+<h3>Наши услуги</h3>
+<div class="div-box">
+    <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="">Добавить услугу</a>
+</div>
+@if (Model.Any())
+{
+    <div>
+        @foreach (ServiceItem entity in Model)
+        {
+        <div>
+            <a style="text-decoration:none; font-weight:bolder;" asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
+                @($"{entity.Title}")
+            </a>
+            <br />
+            <a class="div-box" asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="@entity.Id">Редактировать</a>
+
+            <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
+                <input type="hidden" name="id" value="@entity.Id" />
+                <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">Удалить</a>
+            </form>
+            <br /><br />
+        </div>
+        }
+    </div>
+}

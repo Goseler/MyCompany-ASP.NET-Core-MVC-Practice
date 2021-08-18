@@ -1,0 +1,57 @@
+﻿@{
+    string strTitle = "Панель администратора";
+    ViewBag.Title = strTitle;
+}
+
+
+<div>
+    <h1>@strTitle</h1>
+
+    <div>
+        <label>Выберите страницу для редактирования: </label>
+        <select id="adminSelect" name="adminSelect">
+            <option value="MainPages">Страницы сайта</option>
+            <option value="Services">Наши услуги</option>
+            <option value="News">Новости</option>
+            <option value="NewsReviews">Рецензии новостей</option>
+            <option value="UsersMessages">Сообщения от пользователей</option>
+        </select>
+
+        <div id="results"></div>
+
+        <div class="div-box">
+            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+                <input type="submit" value="Выйти" />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    @*function AjaxLoad() {
+        $.ajax({
+            url: '@Url.Action("Index", "Home", new { Area = "Admin" })',
+            data: { Page: $('select#adminSelect').val() },
+            type: 'POST',
+            success: function (data) {
+                $("div#results").html(data);
+            }
+        });
+    }
+
+    let activeOption = document.querySelector('select#adminSelect');
+    $('select#adminSelect').change(function () {
+        sessionStorage.setItem('ActiveOption', activeOption.value);
+        AjaxLoad.call();
+    });
+
+    if (window.location.pathname.indexOf('/Admin') == 0 || window.location.pathname.indexOf('/admin') == 0)
+    window.onload = () => {
+        activeOption.value = sessionStorage.getItem('ActiveOption') ? sessionStorage.getItem('ActiveOption') : 'MainPages';
+        AjaxLoad.call();
+    };*@
+
+</script>
+
+

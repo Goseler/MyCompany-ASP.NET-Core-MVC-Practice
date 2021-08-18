@@ -1,7 +1,123 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+    <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\ViewComponents\" />
+    <Folder Include="wwwroot\images\uploads\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\ServiceItems\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\TextFields\Edit.cshtml" />
+    <None Include="bundleconfig.json" />
+    <None Include="compilerconfig.json" />
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\js\ckeditor\build\ckeditor.js" />
+    <None Include="wwwroot\js\ckeditor\build\ckeditor.js.map" />
+    <None Include="wwwroot\js\ckeditor\build\translations\af.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\ar.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\ast.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\az.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\bg.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\ca.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\cs.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\da.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\de-ch.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\de.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\el.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\en-au.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\en-gb.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\en.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\eo.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\es.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\et.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\eu.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\fa.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\fi.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\fr.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\gl.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\gu.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\he.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\hi.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\hr.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\hu.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\id.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\it.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\ja.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\kk.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\km.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\kn.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\ko.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\ku.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\lt.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\lv.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\nb.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\ne.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\nl.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\no.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\oc.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\pl.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\pt-br.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\pt.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\ro.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\si.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\sk.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\sl.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\sq.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\sr-latn.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\sr.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\sv.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\th.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\tk.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\tr.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\tt.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\ug.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\uk.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\vi.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\zh-cn.js" />
+    <None Include="wwwroot\js\ckeditor\build\translations\zh.js" />
+    <None Include="wwwroot\js\ckeditor\LICENSE.md" />
+    <None Include="wwwroot\js\ckeditor\README.md" />
+    <None Include="wwwroot\js\ckeditor\src\ckeditor.js" />
+    <None Include="wwwroot\js\ckeditor\webpack.config.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="BuildWebCompiler" Version="1.12.394" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="MimeKit" Version="2.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\sass\main.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>

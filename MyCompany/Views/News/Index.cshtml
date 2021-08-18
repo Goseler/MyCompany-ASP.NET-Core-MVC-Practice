@@ -1,0 +1,37 @@
+﻿@model NewsViewModel
+@{
+    ViewBag.Title = Model.TextField.MetaTitle;
+    ViewBag.Description = Model.TextField.MetaDescription;
+    ViewBag.KeyWords = Model.TextField.MetaKeywords;
+}
+
+<div style="margin-bottom:50px;">
+    <input type="button" value="Добавить новость" onclick="location.href='@Url.Action("Add", "News")'" />
+</div>
+<div>
+    @if (Model.NewsItems.Any())
+    {
+        <ul class="big-image-list">
+            @foreach (NewsItem entity in Model.NewsItems)
+            {
+                <li>
+                    <a asp-area="" asp-controller="News" asp-action="Index" asp-route-id="@entity.Id">
+                        @if (entity.TitleImagePath != default)
+                        {
+                            <img src="~/images/uploads/@entity.TitleImagePath" alt="" class="left" />
+                        }
+                        <h4>@entity.Title</h4>
+                    </a>
+                    <p style="text-decoration:underline">@entity.DateAdded.ToString("MMM , dd, yyyy")</p>
+                    <p>@entity.Subtitle</p>
+                </li>
+            }
+        </ul>
+        <br />
+        <page-link page-model="Model.PageViewModel" page-action="Index"></page-link>
+    }
+</div>
+
+@section sidebar{
+    @{await Html.RenderPartialAsync("SidebarPartial"); }
+}

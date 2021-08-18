@@ -1,0 +1,22 @@
+﻿@model IQueryable<ServiceItem>
+
+@if (Model.Any())
+{
+	<section>
+		<h2>Наши услуги</h2>
+        <div class="scroll-sidebar">
+            <ul class="small-image-list">
+                @foreach (ServiceItem entity in Model)
+                {
+                    <li>
+                        <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
+                            <img src="~/images/uploads/@entity.TitleImagePath" alt="" class="left" />
+                            <h4>@entity.Title</h4>
+                        </a>
+                        <p>@entity.Subtitle</p>
+                    </li>
+                }
+            </ul>
+        </div>
+	</section>
+}

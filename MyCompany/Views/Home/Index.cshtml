@@ -1,0 +1,14 @@
+﻿@model TextField
+@{
+    ViewBag.Title = Model.MetaTitle;
+    ViewBag.Description = Model.MetaDescription;
+    ViewBag.KeyWords = Model.MetaKeywords;
+}
+
+<div>
+    @Html.Raw(Model.Text)
+</div>
+
+@section sidebar{
+    @{await Html.RenderPartialAsync("SidebarPartial"); }
+}

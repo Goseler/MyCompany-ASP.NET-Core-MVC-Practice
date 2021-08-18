@@ -1,0 +1,28 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    @{ await Html.RenderPartialAsync("MetatagsPartial");}
+    @{ await Html.RenderPartialAsync("CssPartial");}
+    
+
+</head>
+<body>
+
+    <div id="page-wrapper">
+        @{ await Html.RenderPartialAsync("HeaderPartial");}
+
+        <div id="main">
+            <div class="container">
+                <div class="row main-row">
+                    <div class="col-8 col-12-medium">
+                        @RenderBody()
+                    </div>
+                    @RenderSection("sidebar", false)
+                </div>
+            </div>
+        </div>
+        @{ await Html.RenderPartialAsync("FooterPartial");}
+    </div>
+    @{ await Html.RenderPartialAsync("ScriptsPartial");}
+</body>
+</html>

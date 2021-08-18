@@ -1,0 +1,102 @@
+﻿@model TechMessage 
+@{
+    string strTitle = "Отправить сообщение администратору";
+    ViewBag.Title = strTitle;
+}
+
+
+<div>
+    <h2>@strTitle</h2>
+    <div>
+        <form asp-area="" asp-controller="UserActions" asp-action="Send" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="DateSent" />
+
+            <div asp-validation-summary="All"></div>
+            <div class="div-box">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" />
+                <span asp-validation-for="Title"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Text"></label>
+                <textarea asp-for="Text" class="editor"></textarea>
+                <span asp-validation-for="Text"></span>
+            </div>
+            <input type="submit" value="Отправить" />
+        </form>
+    </div>
+</div>
+
+
+<script src="~/js/ckeditor/build/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('.editor'), {
+
+            toolbar: {
+                items: [
+                    'undo',
+                    'redo',
+                    '|',
+                    'heading',
+                    'fontFamily',
+                    'fontSize',
+                    'bold',
+                    'italic',
+                    'underline',
+                    'subscript',
+                    'superscript',
+                    'strikethrough',
+                    'link',
+                    'fontBackgroundColor',
+                    'fontColor',
+                    'removeFormat',
+                    '|',
+                    'insertTable',
+                    'horizontalLine',
+                    'bulletedList',
+                    'numberedList',
+                    'outdent',
+                    'indent',
+                    'alignment',
+                    '|',
+                    'findAndReplace',
+                    'specialCharacters'
+                ]
+            },
+            language: 'ru',
+            table: {
+                contentToolbar: [
+                    'tableColumn',
+                    'tableRow',
+                    'mergeTableCells',
+                    'tableCellProperties',
+                    'tableProperties'
+                ]
+            },
+            licenseKey: '',
+
+
+
+        })
+        .then(editor => {
+            window.editor = editor;
+
+
+
+
+        })
+        .catch(error => {
+            console.error('Oops, something went wrong!');
+            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+            console.warn('Build id: xnelco8s2gr-w9ij9xrvtm7e');
+            console.error(error);
+        });
+
+</script>
